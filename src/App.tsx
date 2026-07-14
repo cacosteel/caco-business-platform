@@ -1,48 +1,16 @@
-import { useEffect, useState } from "react";
-import { supabase } from "./lib/supabase";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import MainLayout from "./layouts/MainLayout";
+import Dashboard from "./pages/Dashboard";
 
 export default function App() {
-  const [user, setUser] = useState<any>(null);
-
-  useEffect(() => {
-    checkUser();
-
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange(() => {
-      checkUser();
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
-
-  async function checkUser() {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    setUser(user);
-  }
-
-  async function logout() {
-    await supabase.auth.signOut();
-  }
-
-  if (!user) {
-    return (
-      <div style={{ padding: 40 }}>
-        <h1>Not logged in</h1>
-      </div>
-    );
-  }
-
   return (
-    <div style={{ padding: 40 }}>
-      <h1>Welcome</h1>
-
-      <p>{user.email}</p>
-
-      <button onClick={logout}>Logout</button>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<MainLayout />}>
+          <Route index element={<Dashboard />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
