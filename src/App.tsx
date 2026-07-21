@@ -4,7 +4,7 @@ import MainLayout from "./layouts/MainLayout";
 import Dashboard from "./pages/Dashboard";
 import Companies from "./pages/Companies";
 import Products from "./pages/Products";
-import RFQs from "./pages/RFQs";
+import RFQs from "./pages/RFQ";
 import Documents from "./pages/Documents";
 import Users from "./pages/Users";
 import Settings from "./pages/Settings";

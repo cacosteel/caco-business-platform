@@ -8,6 +8,7 @@ export default function Dashboard() {
       <p className="mt-4">
         Welcome to CACO Business Platform.
       </p>
+      
     </div>
   );
 }

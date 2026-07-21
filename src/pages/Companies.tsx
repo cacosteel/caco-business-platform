@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { getCompanies } from "../services/companyService";
 import CompanyForm from "../components/CompanyForm";
-<p>Total Companies...
-<CompanyForm onSaved={loadCompanies} />
+
 
 export default function Companies() {
   const [companies, setCompanies] = useState<any[]>([]);
@@ -19,7 +18,7 @@ export default function Companies() {
   return (
     <div>
       <h1 className="text-3xl font-bold mb-6">Companies</h1>
-
+      <CompanyForm onSaved={loadCompanies} />
       <p>Total Companies: {companies.length}</p>
 
       <div className="mt-6">
