@@ -1,13 +1,35 @@
 import { useCompanies } from "../../hooks/useCompanies";
+import { createCompany } from "../../services/companyService";
 
 export default function Companies() {
-  const { companies, loading } = useCompanies();
+  const { companies, loading, refresh } = useCompanies();
+
+  async function addCompany() {
+    await createCompany({
+      name: "New Company",
+      short_name: "NEW",
+      company_type: "Customer",
+      country: "Türkiye",
+      city: "Antalya",
+      address: "",
+      website: "",
+      email: "",
+      phone: "",
+      tax_number: "",
+      notes: "",
+      is_active: true,
+    });
+
+    refresh();
+  }
 
   if (loading) return <p>Loading...</p>;
 
   return (
     <>
       <h1>Companies</h1>
+
+      <button onClick={addCompany}>+ Add Test Company</button>
 
       <p>Total Companies: {companies.length}</p>
 

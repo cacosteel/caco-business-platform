@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getCompanies } from "../services/companyService";
-import type { c } from "../types/company";
+import type { company } from "../types/company";
 
 export function useCompanies() {
   const [companies, setCompanies] = useState<company[]>([]);
