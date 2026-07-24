@@ -13,6 +13,7 @@ export default function CompanyTable({
     <table border={1} cellPadding={8}>
       <thead>
         <tr>
+          <th>ID</th>
           <th>Name</th>
           <th>Country</th>
           <th>City</th>
@@ -24,6 +25,7 @@ export default function CompanyTable({
       <tbody>
         {companies.map((company) => (
           <tr key={company.id}>
+            <td>{company.id}</td>
             <td>{company.name}</td>
             <td>{company.country}</td>
             <td>{company.city}</td>
