@@ -26,16 +26,16 @@ export default function App() {
         <Route path="/" element={<Login />} />
 
         <Route element={<DashboardLayout />}>
-          <Route path="/dashboard" element={<DashboardHome />} />
-          <Route path="/dashboard/companies" element={<Companies />} />
-          <Route path="/dashboard/contacts" element={<Contacts />} />
-          <Route path="/dashboard/products" element={<Products />} />
-          <Route path="/dashboard/inquiries" element={<Inquiries />} />
-          <Route path="/dashboard/quotations" element={<Quotations />} />
-          <Route path="/dashboard/orders" element={<Orders />} />
-          <Route path="/dashboard/documents" element={<Documents />} />
-          <Route path="/dashboard/settings" element={<Settings />} />
-        </Route>
+  <Route path="/dashboard" element={<DashboardHome />} />
+  <Route path="/dashboard/companies" element={<Companies />} />
+  <Route path="/dashboard/contacts" element={<Contacts />} />
+  <Route path="/dashboard/products" element={<Products />} />
+  <Route path="/dashboard/inquiries" element={<Inquiries />} />
+  <Route path="/dashboard/quotations" element={<Quotations />} />
+  <Route path="/dashboard/orders" element={<Orders />} />
+  <Route path="/dashboard/documents" element={<Documents />} />
+  <Route path="/dashboard/settings" element={<Settings />} />
+</Route>
       </Routes>
     </BrowserRouter>
   );
