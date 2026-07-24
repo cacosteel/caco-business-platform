@@ -1,6 +1,8 @@
 import { useCompanies } from "../../hooks/useCompanies";
 import { createCompany } from "../../services/companyService";
 import CompanyForm from "../../components/companies/CompanyForm";
+import CompanyTable from "../../components/companies/CompanyTable";
+import { deleteCompany } from "../../services/companyService";
 
 export default function Companies() {
   const { companies, loading, refresh } = useCompanies();
@@ -23,6 +25,11 @@ export default function Companies() {
   refresh();
 }
 
+async function removeCompany(id: string) {
+  await deleteCompany(id);
+  refresh();
+}
+
   if (loading) return <p>Loading...</p>;
 
   return (
@@ -33,27 +40,7 @@ export default function Companies() {
 
       <p>Total Companies: {companies.length}</p>
 
-      <table border={1} cellPadding={8}>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Country</th>
-            <th>City</th>
-            <th>Email</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {companies.map((company) => (
-            <tr key={company.id}>
-              <td>{company.name}</td>
-              <td>{company.country}</td>
-              <td>{company.city}</td>
-              <td>{company.email}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <CompanyTable companies={companies} onDelete={removeCompany} />
     </>
   );
 }
