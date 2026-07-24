@@ -1,40 +1,11 @@
-import { useEffect, useState } from "react";
-import { getCompanies } from "../services/companyService";
-import CompanyForm from "../components/CompanyForm";
-
-
 export default function Companies() {
-  const [companies, setCompanies] = useState<any[]>([]);
-
-  useEffect(() => {
-    loadCompanies();
-  }, []);
-
-  async function loadCompanies() {
-    const data = await getCompanies();
-    setCompanies(data);
-  }
-
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-6">Companies</h1>
-      <CompanyForm onSaved={loadCompanies} />
-      <p>Total Companies: {companies.length}</p>
+      <h1 className="text-3xl font-bold mb-4">
+        Companies
+      </h1>
 
-      <div className="mt-6">
-        {companies.map((company) => (
-          <div
-            key={company.id}
-            className="border rounded p-4 mb-3 bg-white"
-          >
-            <strong>{company.name}</strong>
-
-            <br />
-
-            {company.country}
-          </div>
-        ))}
-      </div>
+      <p>Company Management Module</p>
     </div>
   );
 }

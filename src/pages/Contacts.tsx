@@ -1,11 +1,11 @@
-export default function Products() {
+export default function Contacts() {
   return (
     <div>
       <h1 className="text-3xl font-bold mb-4">
-        Products
+        Contacts
       </h1>
 
-      <p>Product Management Module</p>
+      <p>Company Contacts Module</p>
     </div>
   );
 }
