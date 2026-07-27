@@ -9,25 +9,15 @@ import Quotations from "./pages/dashboard/Quotations";
 import Orders from "./pages/dashboard/Orders";
 import Documents from "./pages/dashboard/Documents";
 import Settings from "./pages/dashboard/Settings";
-import Quotations from "./pages/Quotations";
-
-function DashboardHome() {
-  return (
-    <>
-      <h1>Dashboard</h1>
-      <p>Welcome to CACO Business Platform</p>
-    </>
-  );
-}
+import Dashboard from "./pages/dashboard/Dashboard";
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
-
         <Route element={<DashboardLayout />}>
-  <Route path="/dashboard" element={<DashboardHome />} />
+  <Route path="/dashboard" element={<Dashboard />} />
   <Route path="/dashboard/companies" element={<Companies />} />
   <Route path="/dashboard/contacts" element={<Contacts />} />
   <Route path="/dashboard/products" element={<Products />} />
