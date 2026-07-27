@@ -1,6 +1,10 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { useAuth } from "./contexts/AuthContext";
+
 import Login from "./pages/Login";
 import DashboardLayout from "./layouts/DashboardLayout";
+
+import DashboardHome from "./pages/dashboard/DashboardHome";
 import Companies from "./pages/dashboard/Companies";
 import Contacts from "./pages/dashboard/Contacts";
 import Products from "./pages/dashboard/Products";
@@ -9,26 +13,44 @@ import Quotations from "./pages/dashboard/Quotations";
 import Orders from "./pages/dashboard/Orders";
 import Documents from "./pages/dashboard/Documents";
 import Settings from "./pages/dashboard/Settings";
-import Dashboard from "./pages/dashboard/Dashboard";
 
-export default function App() {
+function App() {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route element={<DashboardLayout />}>
-  <Route path="/dashboard" element={<Dashboard />} />
-  <Route path="/dashboard/companies" element={<Companies />} />
-  <Route path="/dashboard/contacts" element={<Contacts />} />
-  <Route path="/dashboard/products" element={<Products />} />
-  <Route path="/dashboard/inquiries" element={<Inquiries />} />
-  <Route path="/dashboard/quotations" element={<Quotations />} />
-  <Route path="/dashboard/orders" element={<Orders />} />
-  <Route path="/dashboard/documents" element={<Documents />} />
-  <Route path="/dashboard/settings" element={<Settings />} />
-  <Route path="/quotations" element={<Quotations />} />
-</Route>
+        {!user ? (
+          <>
+            <Route path="/" element={<Login />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </>
+        ) : (
+          <>
+            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+
+            <Route path="/dashboard" element={<DashboardLayout />}>
+              <Route index element={<DashboardHome />} />
+              <Route path="companies" element={<Companies />} />
+              <Route path="contacts" element={<Contacts />} />
+              <Route path="products" element={<Products />} />
+              <Route path="inquiries" element={<Inquiries />} />
+              <Route path="quotations" element={<Quotations />} />
+              <Route path="orders" element={<Orders />} />
+              <Route path="documents" element={<Documents />} />
+              <Route path="settings" element={<Settings />} />
+            </Route>
+
+            <Route path="*" element={<Navigate to="/dashboard" replace />} />
+          </>
+        )}
       </Routes>
     </BrowserRouter>
   );
 }
+
+export default App;
