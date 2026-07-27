@@ -9,6 +9,7 @@ import Quotations from "./pages/dashboard/Quotations";
 import Orders from "./pages/dashboard/Orders";
 import Documents from "./pages/dashboard/Documents";
 import Settings from "./pages/dashboard/Settings";
+import Quotations from "./pages/Quotations";
 
 function DashboardHome() {
   return (
@@ -35,6 +36,7 @@ export default function App() {
   <Route path="/dashboard/orders" element={<Orders />} />
   <Route path="/dashboard/documents" element={<Documents />} />
   <Route path="/dashboard/settings" element={<Settings />} />
+  <Route path="/quotations" element={<Quotations />} />
 </Route>
       </Routes>
     </BrowserRouter>
