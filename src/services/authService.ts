@@ -22,11 +22,6 @@ export async function getUserProfile() {
     .eq("id", user.id)
     .maybeSingle();
 
-  console.log("PROFILE QUERY");
-  console.log("USER ID:", user.id);
-  console.log("DATA:", data);
-  console.log("ERROR:", error);
-
   if (error) throw error;
 
   return data;

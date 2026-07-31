@@ -1,47 +1,24 @@
+import { useState } from "react";
+import { Button, Group, Title } from "@mantine/core";
 import { useQuotations } from "../../hooks/useQuotations";
-import {
-  createQuotation,
-  deleteQuotation,
-} from "../../services/quotationService";
+import { deleteQuotation } from "../../services/quotationService";
 import QuotationForm from "../../components/quotations/QuotationForm";
 import QuotationTable from "../../components/quotations/QuotationTable";
+import type { quotation } from "../../types/quotation";
 
 export default function Quotations() {
   const { quotations, loading, refresh } = useQuotations();
-
-  async function addQuotation(data: {
-    inquiry_id: string;
-    quotation_no: string;
-    quotation_date: string;
-    valid_until: string;
-    currency: string;
-    total_amount: number;
-    status: string;
-    notes: string;
-  }) {
-    await createQuotation(data);
-    refresh();
-  }
-
-  async function removeQuotation(id: string) {
-    await deleteQuotation(id);
-    refresh();
-  }
+  const [opened, setOpened] = useState(false);
+  const [selected, setSelected] = useState<quotation>();
+  const close = () => { setOpened(false); setSelected(undefined); };
+  const remove = async (id: string) => {
+    if (window.confirm("Delete this quotation?")) { await deleteQuotation(id); await refresh(); }
+  };
 
   if (loading) return <p>Loading...</p>;
-
-  return (
-    <>
-      <h1>Quotations</h1>
-
-      <QuotationForm onSave={addQuotation} />
-
-      <p>Total Quotations: {quotations.length}</p>
-
-      <QuotationTable
-        quotations={quotations}
-        onDelete={removeQuotation}
-      />
-    </>
-  );
+  return <>
+    <Group justify="space-between" mb="md"><Title order={1}>Quotations</Title><Button onClick={() => setOpened(true)}>Add quotation</Button></Group>
+    <QuotationTable quotations={quotations} onEdit={(record) => { setSelected(record); setOpened(true); }} onDelete={remove} />
+    <QuotationForm opened={opened} quotation={selected} onClose={close} onSaved={async () => { await refresh(); close(); }} />
+  </>;
 }

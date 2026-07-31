@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 import { getUserProfile } from "../services/authService";
+import type { Profile } from "../types/profile";
 
 const AuthContext = createContext<any>(null);
 
@@ -10,18 +11,14 @@ export function AuthProvider({
   children: React.ReactNode;
 }) {
   const [user, setUser] = useState<any>(null);
-  const [profile, setProfile] = useState<any>(null);
+  const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   async function loadSession() {
-    console.log("Loading auth session...");
-
     try {
       const {
         data: { session },
       } = await supabase.auth.getSession();
-
-      console.log("SESSION:", session);
 
       const currentUser = session?.user ?? null;
 
@@ -30,8 +27,6 @@ export function AuthProvider({
       if (currentUser) {
         try {
           const userProfile = await getUserProfile();
-
-          console.log("PROFILE:", userProfile);
 
           setProfile(userProfile);
         } catch (error) {
@@ -42,7 +37,6 @@ export function AuthProvider({
     } catch (error) {
       console.error("AUTH ERROR:", error);
     } finally {
-      console.log("Setting loading false");
       setLoading(false);
     }
   }
@@ -53,9 +47,14 @@ export function AuthProvider({
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
-      console.log("AUTH CHANGE:", session);
-
       setUser(session?.user ?? null);
+      setProfile(null);
+
+      if (session?.user) {
+        void getUserProfile()
+          .then(setProfile)
+          .catch((error) => console.error("PROFILE ERROR:", error));
+      }
     });
 
     return () => {
@@ -69,6 +68,7 @@ export function AuthProvider({
         user,
         profile,
         loading,
+        refreshProfile: loadSession,
       }}
     >
       {children}

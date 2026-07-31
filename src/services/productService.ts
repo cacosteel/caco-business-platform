@@ -13,7 +13,7 @@ export async function getProducts(): Promise<product[]> {
 }
 
 export async function createProduct(
-  newProduct: Omit<product, "id" | "created_at" | "updated_at">
+  newProduct: Partial<Omit<product, "id" | "created_at" | "updated_at">>
 ) {
   const { error } = await supabase
     .from("products")
