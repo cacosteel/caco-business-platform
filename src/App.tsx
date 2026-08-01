@@ -23,6 +23,7 @@ import Profile from "./pages/dashboard/Profile";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Documents from "./pages/dashboard/Documents";
 import CompanyProfile from "./pages/dashboard/CompanyProfile";
+import Administration from "./pages/dashboard/Administration";
 
 function App() {
   return (
@@ -112,6 +113,7 @@ function App() {
           <Route path="profile" element={<Profile />} />
 
           <Route element={<AdminRoute />}>
+            <Route path="administration" element={<Administration />} />
             <Route path="users" element={<Users />} />
           </Route>
 

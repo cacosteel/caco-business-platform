@@ -25,7 +25,7 @@ export default function DashboardLayout() {
   ];
 
   const menuItems = profile?.role === "admin"
-    ? [...adminMenuItems, { name: "Administration", path: "/dashboard/users" }]
+    ? [...adminMenuItems, { name: "Administration", path: "/dashboard/administration" }]
     : memberMenuItems;
 
   return (
