@@ -16,6 +16,13 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       defaultColorScheme="light"
       theme={{
         primaryColor: "orange",
+        fontSizes: {
+          xs: "11px",
+          sm: "12px",
+          md: "13px",
+          lg: "15px",
+          xl: "18px",
+        },
         colors: {
           orange: [
             "#FFF4EB",

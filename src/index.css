@@ -10,4 +10,17 @@ body,
 
 body {
   background: #f3f4f6;
+  font-size: 14px;
+}
+
+#root h1 {
+  font-size: 24px;
+}
+
+#root h2 {
+  font-size: 19px;
+}
+
+#root h3 {
+  font-size: 16px;
 }
