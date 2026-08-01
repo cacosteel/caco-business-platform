@@ -5,7 +5,14 @@ export default function DashboardLayout() {
   const location = useLocation();
   const { profile } = useAuth();
 
-  const menuItems = [
+  const memberMenuItems = [
+    { name: "Dashboard", path: "/dashboard" },
+    { name: "My Company", path: "/dashboard/companies" },
+    { name: "Contacts", path: "/dashboard/contacts" },
+    { name: "My Profile", path: "/dashboard/profile" },
+  ];
+
+  const adminMenuItems = [
     { name: "Dashboard", path: "/dashboard" },
     { name: "Companies", path: "/dashboard/companies" },
     { name: "Contacts", path: "/dashboard/contacts" },
@@ -17,9 +24,9 @@ export default function DashboardLayout() {
     { name: "My Profile", path: "/dashboard/profile" },
   ];
 
-  if (profile?.role === "admin") {
-    menuItems.push({ name: "User approvals", path: "/dashboard/users" });
-  }
+  const menuItems = profile?.role === "admin"
+    ? [...adminMenuItems, { name: "Administration", path: "/dashboard/users" }]
+    : memberMenuItems;
 
   return (
     <div
