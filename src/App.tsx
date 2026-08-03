@@ -28,6 +28,7 @@ import CompanyTypes from "./pages/dashboard/CompanyTypes";
 import DeletionRequests from "./pages/dashboard/DeletionRequests";
 import PublicResources from "./pages/dashboard/PublicResources";
 import ActivityTypes from "./pages/dashboard/ActivityTypes";
+import PlatformSettings from "./pages/dashboard/PlatformSettings";
 
 function App() {
   return (
@@ -122,6 +123,7 @@ function App() {
             <Route path="deletion-requests" element={<DeletionRequests />} />
             <Route path="public-resources" element={<PublicResources />} />
             <Route path="activity-types" element={<ActivityTypes />} />
+            <Route path="platform-settings" element={<PlatformSettings />} />
             <Route path="users" element={<Users />} />
           </Route>
 
