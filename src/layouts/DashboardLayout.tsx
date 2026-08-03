@@ -11,6 +11,7 @@ export default function DashboardLayout() {
     { name: "Contacts", path: "/dashboard/contacts" },
     { name: "Email Templates", path: "/dashboard/email-templates" },
     { name: "Compose Email", path: "/dashboard/compose-email" },
+    { name: "Sent Emails", path: "/dashboard/sent-emails" },
     { name: "My Profile", path: "/dashboard/profile" },
   ];
 
@@ -20,6 +21,7 @@ export default function DashboardLayout() {
     { name: "Contacts", path: "/dashboard/contacts" },
     { name: "Email Templates", path: "/dashboard/email-templates" },
     { name: "Compose Email", path: "/dashboard/compose-email" },
+    { name: "Sent Emails", path: "/dashboard/sent-emails" },
     { name: "Products", path: "/dashboard/products" },
     { name: "Inquiries", path: "/dashboard/inquiries" },
     { name: "Quotations", path: "/dashboard/quotations" },

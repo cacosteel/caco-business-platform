@@ -34,6 +34,7 @@ import Invite from "./pages/Invite";
 import EmailTemplates from "./pages/dashboard/EmailTemplates";
 import GmailSettings from "./pages/dashboard/GmailSettings";
 import ComposeEmail from "./pages/dashboard/ComposeEmail";
+import SentEmails from "./pages/dashboard/SentEmails";
 
 function App() {
   return (
@@ -81,6 +82,7 @@ function App() {
 
           <Route path="email-templates" element={<EmailTemplates />} />
           <Route path="compose-email" element={<ComposeEmail />} />
+          <Route path="sent-emails" element={<SentEmails />} />
 
           <Route
             path="products"
