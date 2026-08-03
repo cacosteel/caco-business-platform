@@ -17,3 +17,24 @@ export async function requestDeletion(entityType: DeletableEntity, entityId: str
 
   if (error) throw error;
 }
+
+export interface DeletionRequest {
+  id: string;
+  entity_type: DeletableEntity;
+  entity_id: string;
+  reason: string;
+  requested_by: string;
+  requested_at: string;
+  status: "pending" | "approved" | "rejected";
+}
+
+export async function getPendingDeletionRequests(): Promise<DeletionRequest[]> {
+  const { data, error } = await supabase.from("deletion_requests").select("*").eq("status", "pending").order("requested_at");
+  if (error) throw error;
+  return (data ?? []) as DeletionRequest[];
+}
+
+export async function reviewDeletionRequest(id: string, decision: "approved" | "rejected"): Promise<void> {
+  const { error } = await supabase.rpc("review_deletion_request", { request_id: id, decision });
+  if (error) throw error;
+}

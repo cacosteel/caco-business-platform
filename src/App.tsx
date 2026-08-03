@@ -25,6 +25,7 @@ import Documents from "./pages/dashboard/Documents";
 import CompanyProfile from "./pages/dashboard/CompanyProfile";
 import Administration from "./pages/dashboard/Administration";
 import CompanyTypes from "./pages/dashboard/CompanyTypes";
+import DeletionRequests from "./pages/dashboard/DeletionRequests";
 
 function App() {
   return (
@@ -116,6 +117,7 @@ function App() {
           <Route element={<AdminRoute />}>
             <Route path="administration" element={<Administration />} />
             <Route path="company-types" element={<CompanyTypes />} />
+            <Route path="deletion-requests" element={<DeletionRequests />} />
             <Route path="users" element={<Users />} />
           </Route>
 
