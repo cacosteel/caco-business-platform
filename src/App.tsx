@@ -32,6 +32,7 @@ import PlatformSettings from "./pages/dashboard/PlatformSettings";
 import Invitations from "./pages/dashboard/Invitations";
 import Invite from "./pages/Invite";
 import EmailTemplates from "./pages/dashboard/EmailTemplates";
+import GmailSettings from "./pages/dashboard/GmailSettings";
 
 function App() {
   return (
@@ -131,6 +132,7 @@ function App() {
             <Route path="activity-types" element={<ActivityTypes />} />
             <Route path="platform-settings" element={<PlatformSettings />} />
             <Route path="invitations" element={<Invitations />} />
+            <Route path="gmail" element={<GmailSettings />} />
             <Route path="users" element={<Users />} />
           </Route>
 
