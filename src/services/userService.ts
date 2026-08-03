@@ -1,5 +1,5 @@
 import { supabase } from "../lib/supabase";
-import type { Profile, UserRole } from "../types/profile";
+import type { ApprovalStatus, Profile, UserRole } from "../types/profile";
 
 export type PendingUser = Profile & {
   companies?: { name: string } | null;
@@ -14,6 +14,24 @@ export async function getPendingUsers(): Promise<PendingUser[]> {
 
   if (error) throw error;
   return (data ?? []) as PendingUser[];
+}
+
+export type ManagedUser = Profile & { companies?: { name: string } | null };
+
+export async function getUsers(): Promise<ManagedUser[]> {
+  const { data, error } = await supabase.from("profiles").select("*, companies(name)").order("created_at", { ascending: false });
+  if (error) throw error;
+  return (data ?? []) as ManagedUser[];
+}
+
+export async function updateUserAccess(userId: string, companyId: string | null, role: UserRole, status: ApprovalStatus): Promise<void> {
+  const { error } = await supabase.rpc("update_user_access", {
+    target_user_id: userId,
+    target_company_id: companyId,
+    target_role: role,
+    target_status: status,
+  });
+  if (error) throw error;
 }
 
 export async function decideUserAccess(
