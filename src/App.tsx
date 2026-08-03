@@ -29,6 +29,8 @@ import DeletionRequests from "./pages/dashboard/DeletionRequests";
 import PublicResources from "./pages/dashboard/PublicResources";
 import ActivityTypes from "./pages/dashboard/ActivityTypes";
 import PlatformSettings from "./pages/dashboard/PlatformSettings";
+import Invitations from "./pages/dashboard/Invitations";
+import Invite from "./pages/Invite";
 
 function App() {
   return (
@@ -52,6 +54,7 @@ function App() {
         />
 
         <Route path="/pending-approval" element={<PendingApproval />} />
+        <Route path="/invite" element={<Invite />} />
 
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<DashboardLayout />}>
@@ -124,6 +127,7 @@ function App() {
             <Route path="public-resources" element={<PublicResources />} />
             <Route path="activity-types" element={<ActivityTypes />} />
             <Route path="platform-settings" element={<PlatformSettings />} />
+            <Route path="invitations" element={<Invitations />} />
             <Route path="users" element={<Users />} />
           </Route>
 

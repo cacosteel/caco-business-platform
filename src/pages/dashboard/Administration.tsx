@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 const adminTools = [
   { title: "Users", description: "Review user access and manage platform accounts.", path: "/dashboard/users", action: "Manage users", available: true },
+  { title: "Invitations", description: "Invite new users and assign their company access before they join.", path: "/dashboard/invitations", action: "Invite user", available: true },
   { title: "Deletion requests", description: "Review member requests before records are soft-deleted.", path: "/dashboard/deletion-requests", action: "Review requests", available: true },
   { title: "Company types", description: "Manage the available company categories.", path: "/dashboard/company-types", action: "Manage types", available: true },
   { title: "Activity types", description: "Manage the communication options used in company activity records.", path: "/dashboard/activity-types", action: "Manage types", available: true },
