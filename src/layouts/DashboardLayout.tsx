@@ -9,6 +9,7 @@ export default function DashboardLayout() {
     { name: "Dashboard", path: "/dashboard" },
     { name: "My Company", path: "/dashboard/companies" },
     { name: "Contacts", path: "/dashboard/contacts" },
+    { name: "Email Templates", path: "/dashboard/email-templates" },
     { name: "My Profile", path: "/dashboard/profile" },
   ];
 
@@ -16,6 +17,7 @@ export default function DashboardLayout() {
     { name: "Dashboard", path: "/dashboard" },
     { name: "Companies", path: "/dashboard/companies" },
     { name: "Contacts", path: "/dashboard/contacts" },
+    { name: "Email Templates", path: "/dashboard/email-templates" },
     { name: "Products", path: "/dashboard/products" },
     { name: "Inquiries", path: "/dashboard/inquiries" },
     { name: "Quotations", path: "/dashboard/quotations" },

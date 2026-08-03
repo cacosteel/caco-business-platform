@@ -31,6 +31,7 @@ import ActivityTypes from "./pages/dashboard/ActivityTypes";
 import PlatformSettings from "./pages/dashboard/PlatformSettings";
 import Invitations from "./pages/dashboard/Invitations";
 import Invite from "./pages/Invite";
+import EmailTemplates from "./pages/dashboard/EmailTemplates";
 
 function App() {
   return (
@@ -75,6 +76,8 @@ function App() {
             path="contacts"
             element={<Contacts />}
           />
+
+          <Route path="email-templates" element={<EmailTemplates />} />
 
           <Route
             path="products"
