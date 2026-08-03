@@ -26,6 +26,7 @@ import CompanyProfile from "./pages/dashboard/CompanyProfile";
 import Administration from "./pages/dashboard/Administration";
 import CompanyTypes from "./pages/dashboard/CompanyTypes";
 import DeletionRequests from "./pages/dashboard/DeletionRequests";
+import PublicResources from "./pages/dashboard/PublicResources";
 
 function App() {
   return (
@@ -118,6 +119,7 @@ function App() {
             <Route path="administration" element={<Administration />} />
             <Route path="company-types" element={<CompanyTypes />} />
             <Route path="deletion-requests" element={<DeletionRequests />} />
+            <Route path="public-resources" element={<PublicResources />} />
             <Route path="users" element={<Users />} />
           </Route>
 
