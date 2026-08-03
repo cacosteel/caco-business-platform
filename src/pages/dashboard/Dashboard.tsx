@@ -21,18 +21,18 @@ export default function DashboardHome() {
     <div>
       <h1
         style={{
-          marginBottom: "30px",
+          marginBottom: "20px",
           color: "#0B1F3A",
         }}
       >
-        Welcome to CACO Business Platform
+        Dashboard
       </h1>
 
       <div
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-          gap: "20px",
+          gap: "14px",
         }}
       >
         <StatCard title="Companies" value={companies.length} />
@@ -46,10 +46,10 @@ export default function DashboardHome() {
 
       <div
         style={{
-          marginTop: "40px",
+          marginTop: "24px",
           background: "#ffffff",
           borderRadius: "12px",
-          padding: "24px",
+          padding: "18px",
           boxShadow: "0 2px 10px rgba(0,0,0,0.08)",
         }}
       >

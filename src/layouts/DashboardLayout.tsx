@@ -1,17 +1,17 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
+import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 
 export default function DashboardLayout() {
   const location = useLocation();
   const { profile } = useAuth();
+  const [openGroups, setOpenGroups] = useState({ marketing: true, sales: false });
 
   const memberMenuItems = [
     { name: "Dashboard", path: "/dashboard" },
     { name: "My Company", path: "/dashboard/companies" },
     { name: "Contacts", path: "/dashboard/contacts" },
-    { name: "Email Templates", path: "/dashboard/email-templates" },
-    { name: "Compose Email", path: "/dashboard/compose-email" },
-    { name: "Sent Emails", path: "/dashboard/sent-emails" },
+    { name: "Marketing", group: "marketing", items: [{ name: "Email Templates", path: "/dashboard/email-templates" }, { name: "Compose Email", path: "/dashboard/compose-email" }, { name: "Sent Emails", path: "/dashboard/sent-emails" }] },
     { name: "My Profile", path: "/dashboard/profile" },
   ];
 
@@ -19,14 +19,9 @@ export default function DashboardLayout() {
     { name: "Dashboard", path: "/dashboard" },
     { name: "Companies", path: "/dashboard/companies" },
     { name: "Contacts", path: "/dashboard/contacts" },
-    { name: "Email Templates", path: "/dashboard/email-templates" },
-    { name: "Compose Email", path: "/dashboard/compose-email" },
-    { name: "Sent Emails", path: "/dashboard/sent-emails" },
+    { name: "Marketing", group: "marketing", items: [{ name: "Email Templates", path: "/dashboard/email-templates" }, { name: "Compose Email", path: "/dashboard/compose-email" }, { name: "Sent Emails", path: "/dashboard/sent-emails" }] },
     { name: "Products", path: "/dashboard/products" },
-    { name: "Inquiries", path: "/dashboard/inquiries" },
-    { name: "Quotations", path: "/dashboard/quotations" },
-    { name: "Orders", path: "/dashboard/orders" },
-    { name: "Documents", path: "/dashboard/documents" },
+    { name: "Sales", group: "sales", items: [{ name: "Inquiries", path: "/dashboard/inquiries" }, { name: "Quotations", path: "/dashboard/quotations" }, { name: "Orders", path: "/dashboard/orders" }, { name: "Documents", path: "/dashboard/documents" }] },
     { name: "My Profile", path: "/dashboard/profile" },
   ];
 
@@ -44,18 +39,18 @@ export default function DashboardLayout() {
     >
       <aside
         style={{
-          width: 260,
+          width: 235,
           background: "#0B1F3A",
           color: "#fff",
           display: "flex",
           flexDirection: "column",
-          padding: 24,
+          padding: 18,
         }}
       >
         <h2
           style={{
             margin: 0,
-            marginBottom: 30,
+            marginBottom: 18,
             color: "#F58220",
           }}
         >
@@ -66,30 +61,10 @@ export default function DashboardLayout() {
           style={{
             display: "flex",
             flexDirection: "column",
-            gap: 8,
+            gap: 2,
           }}
         >
-          {menuItems.map((item) => {
-            const active = location.pathname === item.path;
-
-            return (
-              <Link
-                key={item.path}
-                to={item.path}
-                style={{
-                  textDecoration: "none",
-                  color: "#fff",
-                  padding: "12px 16px",
-                  borderRadius: 8,
-                  background: active ? "#F58220" : "transparent",
-                  fontWeight: active ? 600 : 400,
-                  transition: "0.2s",
-                }}
-              >
-                {item.name}
-              </Link>
-            );
-          })}
+          {menuItems.map((item) => item.items ? <div key={item.group}><button onClick={() => setOpenGroups((current) => ({ ...current, [item.group]: !current[item.group as keyof typeof current] }))} style={{ width: "100%", border: 0, textAlign: "left", background: "transparent", color: "#fff", padding: "9px 12px", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>{item.name} {openGroups[item.group as keyof typeof openGroups] ? "−" : "+"}</button>{openGroups[item.group as keyof typeof openGroups] && item.items.map((child) => { const active = location.pathname === child.path; return <Link key={child.path} to={child.path} style={{ display: "block", textDecoration: "none", color: "#fff", padding: "8px 12px 8px 24px", borderRadius: 6, background: active ? "#F58220" : "transparent", fontSize: 12, fontWeight: active ? 600 : 400 }}>{child.name}</Link>; })}</div> : (() => { const active = location.pathname === item.path; return <Link key={item.path} to={item.path} style={{ textDecoration: "none", color: "#fff", padding: "9px 12px", borderRadius: 6, background: active ? "#F58220" : "transparent", fontSize: 13, fontWeight: active ? 600 : 400 }}>{item.name}</Link>; })())}
         </nav>
 
         <div
@@ -171,7 +146,7 @@ export default function DashboardLayout() {
 
   <div
     style={{
-      padding: 30,
+      padding: 22,
     }}
   >
     <Outlet />

@@ -11,17 +11,17 @@ export default function StatCard({
     <div
       style={{
         background: "#fff",
-        borderRadius: 12,
-        padding: 24,
+        borderRadius: 10,
+        padding: 16,
         boxShadow: "0 2px 10px rgba(0,0,0,.08)",
-        minWidth: 180,
+        minWidth: 150,
       }}
     >
       <div
         style={{
           color: "#666",
           fontSize: 14,
-          marginBottom: 10,
+          marginBottom: 6,
         }}
       >
         {title}
@@ -29,7 +29,7 @@ export default function StatCard({
 
       <div
         style={{
-          fontSize: 34,
+          fontSize: 27,
           fontWeight: 700,
           color: "#0B1F3A",
         }}
