@@ -1,13 +1,4 @@
-export const ACTIVITY_TYPES = [
-  "phone_call",
-  "email",
-  "meeting",
-  "message",
-  "follow_up",
-  "note",
-] as const;
-
-export type ActivityType = (typeof ACTIVITY_TYPES)[number];
+export type ActivityType = string;
 
 export interface Activity {
   id: string;
