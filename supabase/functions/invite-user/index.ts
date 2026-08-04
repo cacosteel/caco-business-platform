@@ -25,20 +25,40 @@ Deno.serve(async (request) => {
     const { email, companyId, role = "member" } = await request.json();
     if (typeof email !== "string" || !email.trim() || typeof companyId !== "string" || !companyId) throw new Error("Email and company are required");
     if (role !== "member" && role !== "admin") throw new Error("Invalid role");
+    const normalizedEmail = email.trim().toLowerCase();
 
     const { data: company } = await admin.from("companies").select("id").eq("id", companyId).is("deleted_at", null).maybeSingle();
     if (!company) throw new Error("Company not found");
 
-    const { data: invited, error: inviteError } = await admin.auth.admin.inviteUserByEmail(email.trim().toLowerCase(), {
+    const { data: invited, error: inviteError } = await admin.auth.admin.inviteUserByEmail(normalizedEmail, {
       redirectTo: Deno.env.get("INVITE_REDIRECT_URL") ?? "https://app.cacosteel.com/invite",
-      data: { company_id: companyId, invited_by_admin: true },
+      data: {
+        company_id: companyId,
+        invited_by_admin: true,
+        invited_by: user.id,
+        invited_role: role,
+      },
     });
     if (inviteError || !invited.user) throw inviteError ?? new Error("Invitation could not be created");
 
-    const { error: profileError } = await admin.from("profiles").update({ company_id: companyId, role, approval_status: "pending" }).eq("id", invited.user.id);
+    const { error: profileError } = await admin.from("profiles").upsert({
+      id: invited.user.id,
+      email: normalizedEmail,
+      company_id: companyId,
+      role,
+      approval_status: "pending",
+    }, { onConflict: "id" });
     if (profileError) throw profileError;
 
-    const { error: recordError } = await admin.from("platform_invitations").insert({ email: email.trim().toLowerCase(), company_id: companyId, role, auth_user_id: invited.user.id, invited_by: user.id });
+    const { error: recordError } = await admin.from("platform_invitations").upsert({
+      email: normalizedEmail,
+      company_id: companyId,
+      role,
+      auth_user_id: invited.user.id,
+      invited_by: user.id,
+      status: "invited",
+      accepted_at: null,
+    }, { onConflict: "auth_user_id" });
     if (recordError) throw recordError;
 
     return Response.json({ ok: true }, { headers: { ...corsHeaders, "Content-Type": "application/json" } });

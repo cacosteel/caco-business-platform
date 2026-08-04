@@ -7,6 +7,7 @@ import "./index.css";
 
 import { MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
+import { Toaster } from "react-hot-toast";
 
 import App from "./App";
 import { AuthProvider } from "./contexts/AuthContext";
@@ -44,6 +45,16 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       }}
     >
       <Notifications />
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 4500,
+          style: {
+            border: "1px solid var(--caco-border)",
+            color: "var(--caco-text-strong)",
+          },
+        }}
+      />
 
       <AuthProvider>
         <App />
