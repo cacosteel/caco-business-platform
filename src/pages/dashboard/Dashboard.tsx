@@ -22,7 +22,7 @@ export default function DashboardHome() {
       <h1
         style={{
           marginBottom: "20px",
-          color: "#0B1F3A",
+          color: "#252A31",
         }}
       >
         Dashboard

@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 export default function Sidebar() {
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     `block px-3 py-2 rounded ${
-      isActive ? "bg-orange-500 text-white" : "text-gray-300 hover:bg-slate-800"
+      isActive ? "bg-red-600 text-white" : "text-gray-300 hover:bg-slate-800"
     }`;
 
   return (

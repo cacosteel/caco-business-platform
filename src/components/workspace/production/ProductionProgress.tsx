@@ -23,7 +23,7 @@ export default function ProductionProgress({
       <div className="w-full h-3 rounded bg-gray-200">
 
         <div
-          className="h-3 rounded bg-orange-500"
+          className="h-3 rounded bg-red-600"
           style={{
             width: `${progress}%`,
           }}

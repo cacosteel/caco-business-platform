@@ -53,7 +53,7 @@ export default function DocumentsTable() {
 
               <td className="p-3">
 
-                <button className="text-orange-500">
+                <button className="text-red-600">
                   Upload
                 </button>
 

@@ -34,13 +34,13 @@ export default function DashboardLayout() {
       style={{
         display: "flex",
         minHeight: "100vh",
-        background: "#f5f7fa",
+        background: "#f7f7f8",
       }}
     >
       <aside
         style={{
           width: 235,
-          background: "#0B1F3A",
+          background: "#252A31",
           color: "#fff",
           display: "flex",
           flexDirection: "column",
@@ -51,7 +51,7 @@ export default function DashboardLayout() {
           style={{
             margin: 0,
             marginBottom: 18,
-            color: "#F58220",
+            color: "#C62828",
           }}
         >
           CACO
@@ -64,7 +64,7 @@ export default function DashboardLayout() {
             gap: 2,
           }}
         >
-          {menuItems.map((item) => item.items ? <div key={item.group}><button onClick={() => setOpenGroups((current) => ({ ...current, [item.group]: !current[item.group as keyof typeof current] }))} style={{ width: "100%", border: 0, textAlign: "left", background: "transparent", color: "#fff", padding: "9px 12px", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>{item.name} {openGroups[item.group as keyof typeof openGroups] ? "−" : "+"}</button>{openGroups[item.group as keyof typeof openGroups] && item.items.map((child) => { const active = location.pathname === child.path; return <Link key={child.path} to={child.path} style={{ display: "block", textDecoration: "none", color: "#fff", padding: "8px 12px 8px 24px", borderRadius: 6, background: active ? "#F58220" : "transparent", fontSize: 12, fontWeight: active ? 600 : 400 }}>{child.name}</Link>; })}</div> : (() => { const active = location.pathname === item.path; return <Link key={item.path} to={item.path} style={{ textDecoration: "none", color: "#fff", padding: "9px 12px", borderRadius: 6, background: active ? "#F58220" : "transparent", fontSize: 13, fontWeight: active ? 600 : 400 }}>{item.name}</Link>; })())}
+          {menuItems.map((item) => item.items ? <div key={item.group}><button onClick={() => setOpenGroups((current) => ({ ...current, [item.group]: !current[item.group as keyof typeof current] }))} style={{ width: "100%", border: 0, textAlign: "left", background: "transparent", color: "#fff", padding: "9px 12px", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>{item.name} {openGroups[item.group as keyof typeof openGroups] ? "−" : "+"}</button>{openGroups[item.group as keyof typeof openGroups] && item.items.map((child) => { const active = location.pathname === child.path; return <Link key={child.path} to={child.path} style={{ display: "block", textDecoration: "none", color: "#fff", padding: "8px 12px 8px 24px", borderRadius: 6, background: active ? "#C62828" : "transparent", fontSize: 12, fontWeight: active ? 600 : 400 }}>{child.name}</Link>; })}</div> : (() => { const active = location.pathname === item.path; return <Link key={item.path} to={item.path} style={{ textDecoration: "none", color: "#fff", padding: "9px 12px", borderRadius: 6, background: active ? "#C62828" : "transparent", fontSize: 13, fontWeight: active ? 600 : 400 }}>{item.name}</Link>; })())}
         </nav>
 
         <div
@@ -85,7 +85,7 @@ export default function DashboardLayout() {
       <main
   style={{
     flex: 1,
-    background: "#f5f7fa",
+    background: "#f7f7f8",
   }}
 >
   <header
@@ -102,7 +102,7 @@ export default function DashboardLayout() {
       <h2
         style={{
           margin: 0,
-          color: "#0B1F3A",
+          color: "#252A31",
         }}
       >
         CACO Business Platform

@@ -19,7 +19,7 @@ export default function Companies() {
         action={
           <button
             style={{
-              background: "#F58220",
+              background: "#C62828",
               color: "#ffffff",
               border: "none",
               borderRadius: 8,

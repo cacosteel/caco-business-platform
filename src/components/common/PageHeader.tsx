@@ -22,7 +22,7 @@ export default function PageHeader({
         <h1
           style={{
             margin: 0,
-            color: "#0B1F3A",
+            color: "#252A31",
           }}
         >
           {title}

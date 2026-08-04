@@ -4,7 +4,7 @@ export default function QuickActions() {
 
     <div className="grid grid-cols-2 gap-4">
 
-      <button className="bg-orange-500 text-white rounded-lg p-4">
+      <button className="bg-red-600 text-white rounded-lg p-4">
         New Inquiry
       </button>
 

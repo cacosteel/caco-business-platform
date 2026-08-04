@@ -11,7 +11,7 @@ const colors: Record<string, string> = {
 
   rejected: "bg-red-100 text-red-700",
 
-  expired: "bg-orange-100 text-orange-700",
+  expired: "bg-red-100 text-red-700",
 
   confirmed: "bg-cyan-100 text-cyan-700",
 

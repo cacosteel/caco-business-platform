@@ -10,7 +10,7 @@ export default function ShipmentTracking() {
 
       <div className="space-y-3">
 
-        <div className="border-l-4 border-orange-500 pl-4">
+        <div className="border-l-4 border-red-600 pl-4">
           Booking Pending
         </div>
 

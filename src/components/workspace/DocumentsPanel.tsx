@@ -21,7 +21,7 @@ export default function DocumentsPanel() {
 
           <span>{doc}</span>
 
-          <button className="text-orange-500">
+          <button className="text-red-600">
             Upload
           </button>
 

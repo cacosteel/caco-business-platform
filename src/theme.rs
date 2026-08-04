@@ -1,7 +1,7 @@
 export const CACO = {
   colors: {
-    primary: "#F58220",
-    secondary: "#0B1F3A",
+    primary: "#C62828",
+    secondary: "#252A31",
     background: "#F5F7FA",
     white: "#FFFFFF",
     border: "#E5E7EB",

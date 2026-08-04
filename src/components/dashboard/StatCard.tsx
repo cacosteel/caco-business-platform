@@ -31,7 +31,7 @@ export default function StatCard({
         style={{
           fontSize: 27,
           fontWeight: 700,
-          color: "#0B1F3A",
+          color: "#252A31",
         }}
       >
         {value}

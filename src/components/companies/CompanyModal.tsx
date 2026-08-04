@@ -86,7 +86,7 @@ export default function CompanyModal({
         </Button>
 
         <Button
-          color="orange"
+          color="red"
           onClick={() => {
             onSave(form);
             onClose();
