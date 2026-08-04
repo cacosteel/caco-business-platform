@@ -14,7 +14,7 @@ export default function RecentActivity() {
 
         <div
           key={item}
-          className="border-l-4 border-red-600 pl-4 py-2"
+          className="border-l-4 border-cyan-500 pl-4 py-2"
         >
           {item}
         </div>

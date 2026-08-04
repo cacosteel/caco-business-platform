@@ -34,20 +34,20 @@ export default function DashboardLayout() {
       style={{
         display: "flex",
         minHeight: "100vh",
-        background: "#f7f7f8",
+        background: "var(--caco-page)",
       }}
     >
       <aside
         style={{
           width: 235,
-          background: "#252A31",
+          background: "var(--caco-sidebar)",
           color: "#fff",
           display: "flex",
           flexDirection: "column",
           padding: 18,
         }}
       >
-        <div style={{ marginBottom: 18, fontSize: 13, lineHeight: 1.5, color: "#d0d7de" }}>
+        <div style={{ marginBottom: 18, fontSize: 13, lineHeight: 1.5, color: "var(--caco-sidebar-muted)" }}>
           <div style={{ fontSize: 16, fontWeight: 700, color: "#fff" }}>CACO Business Platform</div>
           <div>Version 1.0</div>
         </div>
@@ -59,7 +59,7 @@ export default function DashboardLayout() {
             gap: 2,
           }}
         >
-          {menuItems.map((item) => item.items ? <div key={item.group}><button onClick={() => setOpenGroups((current) => ({ ...current, [item.group]: !current[item.group as keyof typeof current] }))} style={{ width: "100%", border: 0, textAlign: "left", background: "transparent", color: "#fff", padding: "9px 12px", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>{item.name} {openGroups[item.group as keyof typeof openGroups] ? "−" : "+"}</button>{openGroups[item.group as keyof typeof openGroups] && item.items.map((child) => { const active = location.pathname === child.path; return <Link key={child.path} to={child.path} style={{ display: "block", textDecoration: "none", color: "#fff", padding: "8px 12px 8px 24px", borderRadius: 6, background: active ? "#C62828" : "transparent", fontSize: 12, fontWeight: active ? 600 : 400 }}>{child.name}</Link>; })}</div> : (() => { const active = location.pathname === item.path; return <Link key={item.path} to={item.path} style={{ textDecoration: "none", color: "#fff", padding: "9px 12px", borderRadius: 6, background: active ? "#C62828" : "transparent", fontSize: 13, fontWeight: active ? 600 : 400 }}>{item.name}</Link>; })())}
+          {menuItems.map((item) => item.items ? <div key={item.group}><button onClick={() => setOpenGroups((current) => ({ ...current, [item.group]: !current[item.group as keyof typeof current] }))} style={{ width: "100%", border: 0, textAlign: "left", background: "transparent", color: "#fff", padding: "9px 12px", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>{item.name} {openGroups[item.group as keyof typeof openGroups] ? "−" : "+"}</button>{openGroups[item.group as keyof typeof openGroups] && item.items.map((child) => { const active = location.pathname === child.path; return <Link key={child.path} to={child.path} style={{ display: "block", textDecoration: "none", color: "#fff", padding: "8px 12px 8px 24px", borderRadius: 6, background: active ? "var(--caco-primary)" : "transparent", fontSize: 12, fontWeight: active ? 600 : 400 }}>{child.name}</Link>; })}</div> : (() => { const active = location.pathname === item.path; return <Link key={item.path} to={item.path} style={{ textDecoration: "none", color: "#fff", padding: "9px 12px", borderRadius: 6, background: active ? "var(--caco-primary)" : "transparent", fontSize: 13, fontWeight: active ? 600 : 400 }}>{item.name}</Link>; })())}
         </nav>
 
         <div
@@ -68,7 +68,7 @@ export default function DashboardLayout() {
             paddingTop: 24,
             borderTop: "1px solid rgba(255,255,255,0.2)",
             fontSize: 13,
-            color: "#d0d7de",
+            color: "var(--caco-sidebar-muted)",
           }}
         >
           <div style={{ fontWeight: 600 }}>{profile?.full_name ?? "User"}</div>
@@ -79,7 +79,7 @@ export default function DashboardLayout() {
       <main
   style={{
     flex: 1,
-    background: "#f7f7f8",
+    background: "var(--caco-page)",
   }}
 >
   <div

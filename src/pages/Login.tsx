@@ -32,12 +32,16 @@ export default function Login() {
   return (
     <div
       style={{
-        maxWidth: 400,
-        margin: "80px auto",
+        minHeight: "100vh",
+        display: "grid",
+        placeItems: "center",
         padding: 24,
+        background: "var(--caco-page)",
       }}
     >
-      <h2>Login</h2>
+      <div style={{ width: "100%", maxWidth: 400, padding: 28, background: "var(--caco-surface)", border: "1px solid var(--caco-border)", borderRadius: 10, boxShadow: "0 8px 30px rgba(62,82,95,0.08)" }}>
+      <h2 style={{ margin: 0, color: "var(--caco-text-strong)" }}>CACO Business Platform</h2>
+      <p style={{ margin: "5px 0 22px", color: "var(--caco-muted)" }}>Sign in to your account</p>
 
       <form onSubmit={handleLogin}>
         <div style={{ marginBottom: 16 }}>
@@ -46,7 +50,7 @@ export default function Login() {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={{ width: "100%", padding: 10 }}
+            style={{ width: "100%", boxSizing: "border-box", padding: 11, border: "1px solid #d9e4e9", borderRadius: 6, color: "var(--caco-text-strong)", outlineColor: "var(--caco-primary)" }}
             required
           />
         </div>
@@ -57,7 +61,7 @@ export default function Login() {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            style={{ width: "100%", padding: 10 }}
+            style={{ width: "100%", boxSizing: "border-box", padding: 11, border: "1px solid #d9e4e9", borderRadius: 6, color: "var(--caco-text-strong)", outlineColor: "var(--caco-primary)" }}
             required
           />
         </div>
@@ -67,18 +71,26 @@ export default function Login() {
           disabled={loading}
           style={{
             width: "100%",
-            padding: 10,
+            padding: 11,
+            border: 0,
+            borderRadius: 6,
+            background: "var(--caco-primary)",
+            color: "#fff",
+            fontWeight: 600,
+            cursor: loading ? "default" : "pointer",
+            opacity: loading ? 0.7 : 1,
           }}
         >
           {loading ? "Signing in..." : "Login"}
         </button>
 
         {error && (
-          <p style={{ color: "red", marginTop: 16 }}>
+          <p style={{ color: "#d95f5f", marginTop: 16 }}>
             {error}
           </p>
         )}
       </form>
+      </div>
     </div>
   );
 }

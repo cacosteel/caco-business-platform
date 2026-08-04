@@ -20,7 +20,7 @@ export default function ProgressStepper({
           <div
             className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold ${
               index <= current
-                ? "bg-red-600 text-white"
+                ? "bg-cyan-500 text-white"
                 : "bg-gray-200 text-gray-500"
             }`}
           >

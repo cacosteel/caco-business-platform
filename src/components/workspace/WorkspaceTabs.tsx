@@ -23,7 +23,7 @@ export default function WorkspaceTabs({
             className={clsx(
               "px-4 py-3 text-sm font-medium border-b-2 transition",
               active === tab
-                ? "border-red-600 text-red-700"
+                ? "border-cyan-500 text-cyan-700"
                 : "border-transparent text-gray-500 hover:text-black"
             )}
           >

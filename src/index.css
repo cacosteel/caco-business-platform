@@ -1,6 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 
+:root {
+  --caco-primary: #36b6cf;
+  --caco-primary-hover: #2b9fb8;
+  --caco-primary-soft: #eaf8fb;
+  --caco-sidebar: #303238;
+  --caco-sidebar-muted: #aeb7bf;
+  --caco-page: #f4f7f9;
+  --caco-surface: #ffffff;
+  --caco-surface-soft: #f8fafb;
+  --caco-border: #e2eaee;
+  --caco-text: #465662;
+  --caco-text-strong: #2d3b45;
+  --caco-muted: #8796a1;
+  --caco-danger: #ee7777;
+}
+
 html,
 body,
 #root {
@@ -10,11 +26,77 @@ body,
 }
 
 body {
-  background: #f7f7f8;
+  background: var(--caco-page);
   font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
   font-size: 12px;
   line-height: 1.5;
-  color: #111827;
+  color: var(--caco-text);
+}
+
+#root a {
+  color: var(--caco-primary-hover);
+}
+
+#root aside a,
+#root aside button {
+  color: #fff;
+}
+
+#root .mantine-Paper-root {
+  background: var(--caco-surface);
+  border-color: var(--caco-border);
+  box-shadow: 0 2px 8px rgba(62, 82, 95, 0.035);
+}
+
+#root .mantine-Input-input {
+  background: var(--caco-surface);
+  border-color: #d9e4e9;
+  color: var(--caco-text-strong);
+}
+
+#root .mantine-Input-input:focus,
+#root .mantine-Input-input:focus-within {
+  border-color: var(--caco-primary);
+}
+
+#root table {
+  width: 100%;
+  border-color: var(--caco-border);
+  background: var(--caco-surface);
+  color: var(--caco-text);
+}
+
+#root th {
+  background: var(--caco-surface-soft);
+  color: var(--caco-text-strong);
+  border-color: var(--caco-border);
+}
+
+#root td {
+  border-color: var(--caco-border);
+}
+
+#root tbody tr:nth-child(even) {
+  background: #fbfdfe;
+}
+
+#root tbody tr:hover {
+  background: var(--caco-primary-soft);
+}
+
+#root main button:not([class]) {
+  border: 1px solid #d6e1e6;
+  border-radius: 5px;
+  background: #fff;
+  color: var(--caco-text);
+  padding: 5px 9px;
+  cursor: pointer;
+}
+
+#root main button:not([class]):hover {
+  border-color: var(--caco-primary);
+  color: var(--caco-primary-hover);
+  background: var(--caco-primary-soft);
 }
 
 #root h2 {
@@ -33,4 +115,5 @@ body {
   font-size: 18px !important;
   font-weight: 600;
   line-height: 1.25;
+  color: var(--caco-text-strong);
 }

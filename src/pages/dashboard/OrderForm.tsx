@@ -384,7 +384,7 @@ export default function OrderForm() {
 
             type="submit"
 
-            className="bg-red-600 text-white px-5 py-2 rounded"
+            className="bg-cyan-500 hover:bg-cyan-600 text-white px-5 py-2 rounded"
 
           >
 

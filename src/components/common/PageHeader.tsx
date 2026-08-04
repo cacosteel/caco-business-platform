@@ -22,7 +22,7 @@ export default function PageHeader({
         <h1
           style={{
             margin: 0,
-            color: "#252A31",
+            color: "var(--caco-text-strong)",
           }}
         >
           {title}
@@ -32,7 +32,7 @@ export default function PageHeader({
           <p
             style={{
               marginTop: 6,
-              color: "#666",
+              color: "var(--caco-muted)",
             }}
           >
             {subtitle}

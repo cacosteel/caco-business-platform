@@ -30,7 +30,7 @@ export default function NotesPanel({
 
         <button
           onClick={() => onSave?.(value)}
-          className="bg-red-600 text-white px-5 py-2 rounded-lg"
+          className="bg-cyan-500 hover:bg-cyan-600 text-white px-5 py-2 rounded-lg"
         >
           Save Notes
         </button>

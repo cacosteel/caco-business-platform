@@ -10,16 +10,17 @@ export default function StatCard({
   return (
     <div
       style={{
-        background: "#fff",
+        background: "var(--caco-surface)",
+        border: "1px solid var(--caco-border)",
         borderRadius: 10,
         padding: 16,
-        boxShadow: "0 2px 10px rgba(0,0,0,.08)",
+        boxShadow: "0 2px 8px rgba(62,82,95,0.04)",
         minWidth: 150,
       }}
     >
       <div
         style={{
-          color: "#666",
+          color: "var(--caco-muted)",
           fontSize: 14,
           marginBottom: 6,
         }}
@@ -31,7 +32,7 @@ export default function StatCard({
         style={{
           fontSize: 27,
           fontWeight: 700,
-          color: "#252A31",
+          color: "var(--caco-text-strong)",
         }}
       >
         {value}

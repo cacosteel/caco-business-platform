@@ -22,7 +22,7 @@ export default function DashboardHome() {
       <h1
         style={{
           marginBottom: "20px",
-          color: "#252A31",
+          color: "var(--caco-text-strong)",
         }}
       >
         Dashboard
@@ -47,15 +47,16 @@ export default function DashboardHome() {
       <div
         style={{
           marginTop: "24px",
-          background: "#ffffff",
+          background: "var(--caco-surface)",
+          border: "1px solid var(--caco-border)",
           borderRadius: "12px",
           padding: "18px",
-          boxShadow: "0 2px 10px rgba(0,0,0,0.08)",
+          boxShadow: "0 2px 8px rgba(62,82,95,0.04)",
         }}
       >
         <h2>Recent Activity</h2>
 
-        <p style={{ color: "#666" }}>
+        <p style={{ color: "var(--caco-muted)" }}>
           No recent activity.
         </p>
       </div>

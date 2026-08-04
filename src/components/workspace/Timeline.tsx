@@ -17,7 +17,7 @@ export default function Timeline({
 
         <div
           key={index}
-          className="border-l-2 border-red-600 pl-4"
+          className="border-l-2 border-cyan-500 pl-4"
         >
 
           <div className="font-medium">
