@@ -16,11 +16,13 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       defaultColorScheme="light"
       theme={{
         primaryColor: "orange",
+        fontFamily: '"Inter", "Segoe UI", Roboto, Arial, sans-serif',
+        lineHeights: { md: "1.5" },
         fontSizes: {
-          xs: "11px",
+          xs: "10px",
           sm: "12px",
-          md: "13px",
-          lg: "15px",
+          md: "14px",
+          lg: "16px",
           xl: "18px",
         },
         colors: {

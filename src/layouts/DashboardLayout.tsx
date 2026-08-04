@@ -91,7 +91,7 @@ export default function DashboardLayout() {
   <header
     style={{
       background: "#ffffff",
-      padding: "20px 30px",
+      padding: "12px 30px",
       borderBottom: "1px solid #e5e7eb",
       display: "flex",
       justifyContent: "space-between",
