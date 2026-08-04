@@ -3,6 +3,31 @@
 
 begin;
 
+create schema if not exists private;
+
+-- Some production databases were deployed before the invitation-history table
+-- migration. Create it here as well so this repair can be run independently.
+create table if not exists public.platform_invitations (
+  id uuid primary key default gen_random_uuid(),
+  email text not null,
+  company_id uuid not null references public.companies(id),
+  role text not null default 'member' check (role in ('admin', 'member')),
+  auth_user_id uuid unique references public.profiles(id),
+  invited_by uuid references public.profiles(id),
+  status text not null default 'invited' check (status in ('invited', 'accepted')),
+  created_at timestamptz not null default now(),
+  accepted_at timestamptz
+);
+
+alter table public.platform_invitations enable row level security;
+
+drop policy if exists platform_invitations_admin_read
+  on public.platform_invitations;
+create policy platform_invitations_admin_read
+  on public.platform_invitations
+  for select to authenticated
+  using (private.is_admin());
+
 -- A missing history record should not prevent an otherwise valid invited user
 -- from completing onboarding. New invitations still always record invited_by.
 alter table public.platform_invitations
