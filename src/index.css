@@ -17,11 +17,6 @@ body {
   color: #111827;
 }
 
-#root h1 {
-  font-size: 18px;
-  font-weight: 600;
-}
-
 #root h2 {
   font-size: 16px;
   font-weight: 600;
@@ -33,7 +28,9 @@ body {
 }
 
 /* Keep module titles compact and consistent with the platform header. */
-#root .mantine-Title-root[data-order="1"] {
+#root h1,
+#root .mantine-Title-root {
   font-size: 18px !important;
+  font-weight: 600;
   line-height: 1.25;
 }
