@@ -48,7 +48,7 @@ export default function DashboardLayout() {
         }}
       >
         <div style={{ marginBottom: 18, fontSize: 13, lineHeight: 1.5, color: "#d0d7de" }}>
-          <div style={{ fontWeight: 700, color: "#fff" }}>CACO Business Platform</div>
+          <div style={{ fontSize: 16, fontWeight: 700, color: "#fff" }}>CACO Business Platform</div>
           <div>Version 1.0</div>
         </div>
 
