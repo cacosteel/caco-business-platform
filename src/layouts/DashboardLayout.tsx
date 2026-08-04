@@ -47,15 +47,10 @@ export default function DashboardLayout() {
           padding: 18,
         }}
       >
-        <h2
-          style={{
-            margin: 0,
-            marginBottom: 18,
-            color: "#C62828",
-          }}
-        >
-          CACO
-        </h2>
+        <div style={{ marginBottom: 18, fontSize: 13, lineHeight: 1.5, color: "#d0d7de" }}>
+          <div style={{ fontWeight: 700, color: "#fff" }}>CACO Business Platform</div>
+          <div>Version 1.0</div>
+        </div>
 
         <nav
           style={{
@@ -76,9 +71,8 @@ export default function DashboardLayout() {
             color: "#d0d7de",
           }}
         >
-          CACO Business Platform
-          <br />
-          Version 1.0
+          <div style={{ fontWeight: 600 }}>{profile?.full_name ?? "User"}</div>
+          <div style={{ fontSize: 12, textTransform: "capitalize" }}>{profile?.role}</div>
         </div>
       </aside>
 
@@ -88,62 +82,6 @@ export default function DashboardLayout() {
     background: "#f7f7f8",
   }}
 >
-  <header
-    style={{
-      background: "#ffffff",
-      padding: "12px 30px",
-      borderBottom: "1px solid #e5e7eb",
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-    }}
-  >
-    <div>
-      <h2
-        style={{
-          margin: 0,
-          color: "#252A31",
-        }}
-      >
-        CACO Business Platform
-      </h2>
-
-      <div
-        style={{
-          color: "#777",
-          fontSize: 14,
-          marginTop: 4,
-        }}
-      >
-        International Steel Trading CRM
-      </div>
-    </div>
-
-    <div
-      style={{
-        textAlign: "right",
-      }}
-    >
-      <div
-        style={{
-          fontWeight: 600,
-        }}
-      >
-        {profile?.full_name ?? "User"}
-      </div>
-
-      <div
-        style={{
-          fontSize: 13,
-          color: "#777",
-          textTransform: "capitalize",
-        }}
-      >
-        {profile?.role}
-      </div>
-    </div>
-  </header>
-
   <div
     style={{
       padding: 22,
