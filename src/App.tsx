@@ -35,6 +35,9 @@ import EmailTemplates from "./pages/dashboard/EmailTemplates";
 import GmailSettings from "./pages/dashboard/GmailSettings";
 import ComposeEmail from "./pages/dashboard/ComposeEmail";
 import SentEmails from "./pages/dashboard/SentEmails";
+import SalesManagement from "./pages/dashboard/SalesManagement";
+import SupplierSourcing from "./pages/dashboard/SupplierSourcing";
+import SalesContracts from "./pages/dashboard/SalesContracts";
 
 function App() {
   return (
@@ -59,7 +62,6 @@ function App() {
 
         <Route path="/pending-approval" element={<PendingApproval />} />
         <Route path="/invite" element={<Invite />} />
-
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<DashboardLayout />}>
 
@@ -94,6 +96,9 @@ function App() {
             element={<Inquiries />}
           />
 
+          <Route path="sales" element={<SalesManagement />} />
+          <Route path="supplier-sourcing" element={<SupplierSourcing />} />
+
           <Route
             path="quotations"
             element={<Quotations />}
@@ -113,6 +118,8 @@ function App() {
             path="orders"
             element={<Orders />}
           />
+
+          <Route path="sales-contracts" element={<SalesContracts />} />
 
           <Route
             path="orders/new"
