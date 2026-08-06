@@ -91,47 +91,19 @@ function App() {
             element={<Products />}
           />
 
-          <Route
-            path="inquiries"
-            element={<Inquiries />}
-          />
-
-          <Route path="sales" element={<SalesManagement />} />
-          <Route path="supplier-sourcing" element={<SupplierSourcing />} />
-
-          <Route
-            path="quotations"
-            element={<Quotations />}
-          />
-
-          <Route
-            path="quotations/new"
-            element={<QuotationForm />}
-          />
-
-          <Route
-            path="quotations/:id"
-            element={<QuotationDetail />}
-          />
-
-          <Route
-            path="orders"
-            element={<Orders />}
-          />
-
-          <Route path="sales-contracts" element={<SalesContracts />} />
-
-          <Route
-            path="orders/new"
-            element={<OrderForm />}
-          />
-
-          <Route
-            path="orders/:id"
-            element={<OrderWorkspace />}
-          />
-
-          <Route path="documents" element={<Documents />} />
+          <Route element={<AdminRoute />}>
+            <Route path="sales" element={<SalesManagement />} />
+            <Route path="inquiries" element={<Inquiries />} />
+            <Route path="supplier-sourcing" element={<SupplierSourcing />} />
+            <Route path="quotations" element={<Quotations />} />
+            <Route path="quotations/new" element={<QuotationForm />} />
+            <Route path="quotations/:id" element={<QuotationDetail />} />
+            <Route path="sales-contracts" element={<SalesContracts />} />
+            <Route path="orders" element={<Orders />} />
+            <Route path="orders/new" element={<OrderForm />} />
+            <Route path="orders/:id" element={<OrderWorkspace />} />
+            <Route path="documents" element={<Documents />} />
+          </Route>
 
           <Route path="profile" element={<Profile />} />
 

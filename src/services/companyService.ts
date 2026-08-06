@@ -29,6 +29,7 @@ export async function getCompanies(): Promise<company[]> {
   const { data, error } = await supabase
     .from("companies")
     .select("*")
+    .is("deleted_at", null)
     .order("name");
 
   if (error) throw error;
