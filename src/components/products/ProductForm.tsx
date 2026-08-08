@@ -1,67 +1,151 @@
-import { useState } from "react";
+import {
+  Button,
+  Group,
+  Modal,
+  Select,
+  Stack,
+  Textarea,
+  TextInput,
+} from "@mantine/core";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
-type Props = {
-  onSave: (product: {
-    code: string;
-    name: string;
-    category: string;
-    description: string;
-    unit: string;
-    unit_price: number;
-    currency: string;
-    is_active: boolean;
-  }) => Promise<void>;
-};
+import {
+  createProduct,
+  updateProduct,
+} from "../../services/productService";
 
-export default function ProductForm({ onSave }: Props) {
-  const [form, setForm] = useState({
-    code: "",
-    name: "",
-    category: "",
-    description: "",
-    unit: "PCS",
-    unit_price: 0,
-    currency: "USD",
-    is_active: true,
-  });
+interface Props {
+  opened: boolean;
+  onClose: () => void;
+  onSaved: () => void;
+  product?: any;
+}
 
-  function change(
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) {
-    const { name, value } = e.target;
+export default function ProductForm({
+  opened,
+  onClose,
+  onSaved,
+  product,
+}: Props) {
+  const [name, setName] = useState("");
+  const [code, setCode] = useState("");
+  const [category, setCategory] = useState("");
+  const [unit, setUnit] = useState("");
+  const [description, setDescription] = useState("");
 
-    setForm({
-      ...form,
-      [name]: name === "unit_price" ? Number(value) : value,
-    });
+  useEffect(() => {
+    if (product) {
+      setName(product.name || "");
+      setCode(product.code || "");
+      setCategory(product.category || "");
+      setUnit(product.unit || "");
+      setDescription(product.description || "");
+    } else {
+      clearForm();
+    }
+  }, [product, opened]);
+
+  function clearForm() {
+    setName("");
+    setCode("");
+    setCategory("");
+    setUnit("");
+    setDescription("");
+  }
+
+  async function handleSubmit() {
+    const payload = {
+      name,
+      code,
+      category,
+      unit,
+      description,
+    };
+
+    try {
+      if (product) {
+        await updateProduct(product.id, payload);
+        toast.success("Product updated");
+      } else {
+        await createProduct(payload);
+        toast.success("Product created");
+      }
+
+      onSaved();
+    } catch (error) {
+      console.error(error);
+      toast.error("Operation failed");
+    }
   }
 
   return (
-    <div style={{ marginBottom: 20 }}>
-      <input
-        name="code"
-        placeholder="Product Code"
-        value={form.code}
-        onChange={change}
-      />
+    <Modal
+      opened={opened}
+      onClose={onClose}
+      title={product ? "Edit Product" : "Add Product"}
+      centered
+    >
+      <Stack>
 
-      <input
-        name="name"
-        placeholder="Product Name"
-        value={form.name}
-        onChange={change}
-      />
+        <TextInput
+          label="Product Name"
+          required
+          value={name}
+          onChange={(e) => setName(e.currentTarget.value)}
+        />
 
-      <input
-        name="category"
-        placeholder="Category"
-        value={form.category}
-        onChange={change}
-      />
+        <TextInput
+          label="Product Code"
+          value={code}
+          onChange={(e) => setCode(e.currentTarget.value)}
+        />
 
-      <button onClick={() => onSave(form)}>
-        Save Product
-      </button>
-    </div>
+        <Select
+          label="Category"
+          value={category}
+          onChange={(value) => setCategory(value || "")}
+          data={[
+            "Steel Coil",
+            "Steel Sheet",
+            "Steel Pipe",
+            "Steel Profile",
+            "Rebar",
+            "Wire Rod",
+            "Fastener",
+            "Tower",
+            "Solar Structure",
+            "Other",
+          ]}
+        />
+
+        <TextInput
+          label="Unit"
+          value={unit}
+          onChange={(e) => setUnit(e.currentTarget.value)}
+        />
+
+        <Textarea
+          label="Description"
+          minRows={4}
+          value={description}
+          onChange={(e) => setDescription(e.currentTarget.value)}
+        />
+
+        <Group justify="flex-end">
+          <Button
+            variant="default"
+            onClick={onClose}
+          >
+            Cancel
+          </Button>
+
+          <Button onClick={handleSubmit}>
+            Save
+          </Button>
+        </Group>
+
+      </Stack>
+    </Modal>
   );
 }

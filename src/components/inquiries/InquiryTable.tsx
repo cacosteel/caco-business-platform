@@ -3,11 +3,13 @@ import type { inquiry } from "../../types/inquiry";
 type Props = {
   inquiries: inquiry[];
   onDelete: (id: string) => Promise<void>;
+  onEdit: (inquiry: inquiry) => void;
 };
 
 export default function InquiryTable({
   inquiries,
   onDelete,
+  onEdit,
 }: Props) {
   return (
     <table border={1} cellPadding={8}>
@@ -29,6 +31,7 @@ export default function InquiryTable({
             <td>{inquiry.status}</td>
             <td>{inquiry.company_id}</td>
             <td>
+              <button onClick={() => onEdit(inquiry)}>Edit</button>{" "}
               <button onClick={() => onDelete(inquiry.id)}>
                 Delete
               </button>

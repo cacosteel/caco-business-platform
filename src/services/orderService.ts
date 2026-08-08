@@ -1,44 +1,181 @@
 import { supabase } from "../lib/supabase";
-import type { order } from "../types/order";
 
-export async function getOrders(): Promise<order[]> {
-  const { data, error } = await supabase
+
+export async function getOrders() {
+
+  const {
+    data,
+    error,
+  } = await supabase
     .from("orders")
     .select("*")
-    .order("order_date", { ascending: false });
+    .order(
+      "created_at",
+      {
+        ascending: false,
+      }
+    );
 
-  if (error) throw error;
 
-  return (data ?? []) as order[];
+  if (error) {
+
+    console.error(
+      "Get orders error:",
+      error
+    );
+
+    throw error;
+
+  }
+
+
+  return data || [];
+
 }
+
+
+
+
+
+export async function getOrderById(
+  id: string
+) {
+
+  const {
+    data,
+    error,
+  } = await supabase
+    .from("orders")
+    .select("*")
+    .eq(
+      "id",
+      id
+    )
+    .single();
+
+
+  if (error) {
+
+    console.error(
+      "Get order by id error:",
+      error
+    );
+
+    throw error;
+
+  }
+
+
+  return data;
+
+}
+
+
+
+
 
 export async function createOrder(
-  newOrder: Omit<order, "id" | "created_at" | "updated_at">
+  order: any
 ) {
-  const { error } = await supabase
-    .from("orders")
-    .insert(newOrder);
 
-  if (error) throw error;
+  const {
+    data,
+    error,
+  } = await supabase
+    .from("orders")
+    .insert([
+      order,
+    ])
+    .select()
+    .single();
+
+
+  if (error) {
+
+    console.error(
+      "Create order error:",
+      error
+    );
+
+    throw error;
+
+  }
+
+
+  return data;
+
 }
+
+
+
+
 
 export async function updateOrder(
   id: string,
-  order: Partial<order>
+  updates: any
 ) {
-  const { error } = await supabase
-    .from("orders")
-    .update(order)
-    .eq("id", id);
 
-  if (error) throw error;
+  const {
+    data,
+    error,
+  } = await supabase
+    .from("orders")
+    .update(updates)
+    .eq(
+      "id",
+      id
+    )
+    .select()
+    .single();
+
+
+  if (error) {
+
+    console.error(
+      "Update order error:",
+      error
+    );
+
+    throw error;
+
+  }
+
+
+  return data;
+
 }
 
-export async function deleteOrder(id: string) {
-  const { error } = await supabase
+
+
+
+
+export async function deleteOrder(
+  id: string
+) {
+
+  const {
+    error,
+  } = await supabase
     .from("orders")
     .delete()
-    .eq("id", id);
+    .eq(
+      "id",
+      id
+    );
 
-  if (error) throw error;
+
+  if (error) {
+
+    console.error(
+      "Delete order error:",
+      error
+    );
+
+    throw error;
+
+  }
+
+
+  return true;
+
 }

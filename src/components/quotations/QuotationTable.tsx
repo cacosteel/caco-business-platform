@@ -3,11 +3,13 @@ import type { quotation } from "../../types/quotation";
 type Props = {
   quotations: quotation[];
   onDelete: (id: string) => Promise<void>;
+  onEdit: (quotation: quotation) => void;
 };
 
 export default function QuotationTable({
   quotations,
   onDelete,
+  onEdit,
 }: Props) {
   return (
     <table border={1} cellPadding={8}>
@@ -33,6 +35,7 @@ export default function QuotationTable({
               {quotation.total_amount} {quotation.currency}
             </td>
             <td>
+              <button onClick={() => onEdit(quotation)}>Edit</button>{" "}
               <button onClick={() => onDelete(quotation.id)}>
                 Delete
               </button>

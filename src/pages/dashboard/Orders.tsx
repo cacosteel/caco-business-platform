@@ -5,6 +5,7 @@ import {
 } from "../../services/orderService";
 import OrderForm from "../../components/orders/OrderForm";
 import OrderTable from "../../components/orders/OrderTable";
+import PageHeader from "../../components/common/PageHeader";
 
 export default function Orders() {
   const { orders, loading, refresh } = useOrders();
@@ -32,11 +33,18 @@ export default function Orders() {
 
   return (
     <>
-      <h1>Orders</h1>
+      <PageHeader
+        title="Orders & Operations"
+        subtitle="Continue accepted business through production, shipment, documents and payment."
+      />
 
-      <OrderForm onSave={addOrder} />
+      <div className="sales-panel">
+        <OrderForm onSave={addOrder} />
+      </div>
 
-      <p>Total Orders: {orders.length}</p>
+      <p style={{ color: "var(--caco-muted)", margin: "16px 0 8px" }}>
+        Total orders: {orders.length}
+      </p>
 
       <OrderTable
         orders={orders}

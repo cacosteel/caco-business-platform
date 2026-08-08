@@ -1,44 +1,133 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
 import Login from "./pages/Login";
+import PendingApproval from "./pages/PendingApproval";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
+import AdminRoute from "./components/auth/AdminRoute";
+
 import DashboardLayout from "./layouts/DashboardLayout";
+
 import Companies from "./pages/dashboard/Companies";
 import Contacts from "./pages/dashboard/Contacts";
 import Products from "./pages/dashboard/Products";
 import Inquiries from "./pages/dashboard/Inquiries";
 import Quotations from "./pages/dashboard/Quotations";
+import QuotationForm from "./pages/dashboard/QuotationForm";
+import QuotationDetail from "./pages/dashboard/QuotationDetail";
+
 import Orders from "./pages/dashboard/Orders";
+import OrderForm from "./pages/dashboard/OrderForm";
+import OrderWorkspace from "./pages/dashboard/workspaces/OrderWorkspace";
+import Users from "./pages/dashboard/Users";
+import Profile from "./pages/dashboard/Profile";
+import Dashboard from "./pages/dashboard/Dashboard";
 import Documents from "./pages/dashboard/Documents";
-import Settings from "./pages/dashboard/Settings";
-import Quotations from "./pages/Quotations";
+import CompanyProfile from "./pages/dashboard/CompanyProfile";
+import Administration from "./pages/dashboard/Administration";
+import CompanyTypes from "./pages/dashboard/CompanyTypes";
+import DeletionRequests from "./pages/dashboard/DeletionRequests";
+import PublicResources from "./pages/dashboard/PublicResources";
+import ActivityTypes from "./pages/dashboard/ActivityTypes";
+import PlatformSettings from "./pages/dashboard/PlatformSettings";
+import Invitations from "./pages/dashboard/Invitations";
+import Invite from "./pages/Invite";
+import EmailTemplates from "./pages/dashboard/EmailTemplates";
+import GmailSettings from "./pages/dashboard/GmailSettings";
+import ComposeEmail from "./pages/dashboard/ComposeEmail";
+import SentEmails from "./pages/dashboard/SentEmails";
+import SalesManagement from "./pages/dashboard/SalesManagement";
+import SupplierSourcing from "./pages/dashboard/SupplierSourcing";
+import SalesContracts from "./pages/dashboard/SalesContracts";
 
-function DashboardHome() {
-  return (
-    <>
-      <h1>Dashboard</h1>
-      <p>Welcome to CACO Business Platform</p>
-    </>
-  );
-}
-
-export default function App() {
+function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Login />} />
 
-        <Route element={<DashboardLayout />}>
-  <Route path="/dashboard" element={<DashboardHome />} />
-  <Route path="/dashboard/companies" element={<Companies />} />
-  <Route path="/dashboard/contacts" element={<Contacts />} />
-  <Route path="/dashboard/products" element={<Products />} />
-  <Route path="/dashboard/inquiries" element={<Inquiries />} />
-  <Route path="/dashboard/quotations" element={<Quotations />} />
-  <Route path="/dashboard/orders" element={<Orders />} />
-  <Route path="/dashboard/documents" element={<Documents />} />
-  <Route path="/dashboard/settings" element={<Settings />} />
-  <Route path="/quotations" element={<Quotations />} />
-</Route>
+      <Routes>
+
+        <Route
+          path="/"
+          element={
+            <Navigate
+              to="/dashboard"
+              replace
+            />
+          }
+        />
+
+        <Route
+          path="/login"
+          element={<Login />}
+        />
+
+        <Route path="/pending-approval" element={<PendingApproval />} />
+        <Route path="/invite" element={<Invite />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/dashboard" element={<DashboardLayout />}>
+
+          <Route
+            index
+            element={<Dashboard />}
+          />
+
+          <Route
+            path="companies"
+            element={<Companies />}
+          />
+
+          <Route path="companies/:id" element={<CompanyProfile />} />
+
+          <Route
+            path="contacts"
+            element={<Contacts />}
+          />
+
+          <Route path="email-templates" element={<EmailTemplates />} />
+          <Route path="compose-email" element={<ComposeEmail />} />
+          <Route path="sent-emails" element={<SentEmails />} />
+
+          <Route
+            path="products"
+            element={<Products />}
+          />
+
+          <Route element={<AdminRoute />}>
+            <Route path="sales" element={<SalesManagement />} />
+            <Route path="inquiries" element={<Inquiries />} />
+            <Route path="supplier-sourcing" element={<SupplierSourcing />} />
+            <Route path="quotations" element={<Quotations />} />
+            <Route path="quotations/new" element={<QuotationForm />} />
+            <Route path="quotations/:id" element={<QuotationDetail />} />
+            <Route path="sales-contracts" element={<SalesContracts />} />
+            <Route path="orders" element={<Orders />} />
+            <Route path="orders/new" element={<OrderForm />} />
+            <Route path="orders/:id" element={<OrderWorkspace />} />
+            <Route path="documents" element={<Documents />} />
+          </Route>
+
+          <Route path="profile" element={<Profile />} />
+
+          <Route element={<AdminRoute />}>
+            <Route path="administration" element={<Administration />} />
+            <Route path="company-types" element={<CompanyTypes />} />
+            <Route path="deletion-requests" element={<DeletionRequests />} />
+            <Route path="public-resources" element={<PublicResources />} />
+            <Route path="activity-types" element={<ActivityTypes />} />
+            <Route path="platform-settings" element={<PlatformSettings />} />
+            <Route path="invitations" element={<Invitations />} />
+            <Route path="gmail" element={<GmailSettings />} />
+            <Route path="users" element={<Users />} />
+          </Route>
+
+        </Route>
+
+        <Route path="*" element={<Navigate to="/" replace />} />
+        </Route>
+
       </Routes>
+
     </BrowserRouter>
   );
 }
+
+export default App;

@@ -1,44 +1,157 @@
 import { supabase } from "../lib/supabase";
-import type { inquiry } from "../types/inquiry";
 
-export async function getInquiries(): Promise<inquiry[]> {
+
+export async function getInquiries() {
+
   const { data, error } = await supabase
     .from("inquiries")
     .select("*")
-    .order("inquiry_date", { ascending: false });
+    .order(
+      "created_at",
+      {
+        ascending: false,
+      }
+    );
 
-  if (error) throw error;
 
-  return (data ?? []) as inquiry[];
+  if (error) {
+
+    console.error(
+      "Get inquiries error:",
+      error
+    );
+
+    throw error;
+
+  }
+
+
+  return data || [];
+
 }
+
+
+
+export async function getInquiryById(
+  id: string
+) {
+
+  const { data, error } = await supabase
+    .from("inquiries")
+    .select("*")
+    .eq(
+      "id",
+      id
+    )
+    .single();
+
+
+  if (error) {
+
+    console.error(
+      "Get inquiry by id error:",
+      error
+    );
+
+    throw error;
+
+  }
+
+
+  return data;
+
+}
+
+
 
 export async function createInquiry(
-  newInquiry: Omit<inquiry, "id" | "created_at" | "updated_at">
+  inquiry: any
 ) {
-  const { error } = await supabase
-    .from("inquiries")
-    .insert(newInquiry);
 
-  if (error) throw error;
+  const { data, error } = await supabase
+    .from("inquiries")
+    .insert(inquiry)
+    .select()
+    .single();
+
+
+  if (error) {
+
+    console.error(
+      "Create inquiry error:",
+      error
+    );
+
+    throw error;
+
+  }
+
+
+  return data;
+
 }
+
+
 
 export async function updateInquiry(
   id: string,
-  inquiry: Partial<inquiry>
+  updates: any
 ) {
-  const { error } = await supabase
-    .from("inquiries")
-    .update(inquiry)
-    .eq("id", id);
 
-  if (error) throw error;
+  const { data, error } = await supabase
+    .from("inquiries")
+    .update(updates)
+    .eq(
+      "id",
+      id
+    )
+    .select()
+    .single();
+
+
+  if (error) {
+
+    console.error(
+      "Update inquiry error:",
+      error
+    );
+
+    throw error;
+
+  }
+
+
+  return data;
+
 }
 
-export async function deleteInquiry(id: string) {
+
+
+export async function deleteInquiry(
+  id: string
+) {
+
   const { error } = await supabase
     .from("inquiries")
     .delete()
-    .eq("id", id);
+    .eq(
+      "id",
+      id
+    );
 
-  if (error) throw error;
+
+  if (error) {
+
+    console.error(
+      "Delete inquiry error:",
+      error
+    );
+
+    throw error;
+
+  }
+
+
+  return true;
+
 }

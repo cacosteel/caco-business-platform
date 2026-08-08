@@ -80,7 +80,7 @@ export default function CompanyForm({ onSaved }: CompanyFormProps) {
       <button
         onClick={saveCompany}
         disabled={saving}
-        className="bg-orange-500 hover:bg-orange-600 disabled:opacity-50 text-white px-4 py-2 rounded"
+        className="bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white px-4 py-2 rounded"
       >
         {saving ? "Saving..." : "Save Company"}
       </button>

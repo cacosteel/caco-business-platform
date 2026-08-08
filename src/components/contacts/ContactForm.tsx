@@ -1,63 +1,223 @@
-import { useState } from "react";
+import {
+  Button,
+  Group,
+  Modal,
+  Stack,
+  TextInput,
+  Select,
+  Anchor,
+} from "@mantine/core";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
-type Props = {
-  onSave: (contact: {
-    company_id: string;
-    first_name: string;
-    last_name: string;
-    position: string;
-    email: string;
-    phone: string;
-    mobile: string;
-    notes: string;
-  }) => Promise<void>;
-};
+import {
+  createContact,
+  updateContact,
+} from "../../services/contactService";
+import { getCompanies } from "../../services/companyService";
+import { countryOptions } from "../../utils/countries";
 
-export default function ContactForm({ onSave }: Props) {
-  const [form, setForm] = useState({
-    company_id: "",
-    first_name: "",
-    last_name: "",
-    position: "",
-    email: "",
-    phone: "",
-    mobile: "",
-    notes: "",
-  });
+interface Props {
+  opened: boolean;
+  onClose: () => void;
+  onSaved: () => void;
+  contact?: any;
+}
 
-  function change(e: React.ChangeEvent<HTMLInputElement>) {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
+export default function ContactForm({
+  opened,
+  onClose,
+  onSaved,
+  contact,
+}: Props) {
+  const navigate = useNavigate();
+  const [companies, setCompanies] = useState<any[]>([]);
+
+  const [companyId, setCompanyId] = useState("");
+  const [companyError, setCompanyError] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [position, setPosition] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [country, setCountry] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [notes, setNotes] = useState("");
+
+  useEffect(() => {
+    loadCompanies();
+  }, []);
+
+  useEffect(() => {
+    setCompanyError("");
+
+    if (contact) {
+      setCompanyId(contact.company_id || "");
+      setFirstName(contact.first_name || "");
+      setLastName(contact.last_name || "");
+      setPosition(contact.position || "");
+      setEmail(contact.email || "");
+      setPhone(contact.phone || "");
+      setCountry(contact.country || "");
+      setMobile(contact.mobile || "");
+      setNotes(contact.notes || "");
+    } else {
+      clearForm();
+    }
+  }, [contact, opened]);
+
+  async function loadCompanies() {
+    const data = await getCompanies();
+    setCompanies(data || []);
+  }
+
+  function clearForm() {
+    setCompanyId("");
+    setCompanyError("");
+    setFirstName("");
+    setLastName("");
+    setPosition("");
+    setEmail("");
+    setPhone("");
+    setCountry("");
+    setMobile("");
+    setNotes("");
+  }
+
+  async function handleSubmit() {
+    if (!companyId) {
+      setCompanyError("Select the company this contact belongs to.");
+      return;
+    }
+
+    const payload = {
+      company_id: companyId,
+      first_name: firstName,
+      last_name: lastName,
+      position,
+      email,
+      phone,
+      country,
+      mobile,
+      notes,
+    };
+
+    try {
+      if (contact) {
+        await updateContact(contact.id, payload);
+        toast.success("Contact updated");
+      } else {
+        await createContact(payload);
+        toast.success("Contact created");
+      }
+
+      onSaved();
+
+    } catch (error) {
+      console.error(error);
+      toast.error("Operation failed");
+    }
+  }
+
+  function goToNewCompany() {
+    onClose();
+    navigate("/dashboard/companies?create=1");
   }
 
   return (
-    <>
-      <input
-        name="company_id"
-        placeholder="Company ID"
-        value={form.company_id}
-        onChange={change}
-      />
+    <Modal
+      opened={opened}
+      onClose={onClose}
+      title={contact ? "Edit Contact" : "Add Contact"}
+      centered
+    >
+      <Stack>
 
-      <input
-        name="first_name"
-        placeholder="First Name"
-        value={form.first_name}
-        onChange={change}
-      />
+        <Select
+          label="Company"
+          required
+          searchable
+          value={companyId}
+          error={companyError}
+          onChange={(value) => {
+            setCompanyId(value || "");
+            setCompanyError("");
+          }}
+          data={companies.map((c) => ({
+            value: c.id,
+            label: c.name,
+          }))}
+        />
 
-      <input
-        name="last_name"
-        placeholder="Last Name"
-        value={form.last_name}
-        onChange={change}
-      />
+        <Anchor component="button" type="button" onClick={goToNewCompany}>
+          Company not listed? Add a new company
+        </Anchor>
 
-      <button onClick={() => onSave(form)}>
-        Save Contact
-      </button>
-    </>
+        <TextInput
+          label="First Name"
+          required
+          value={firstName}
+          onChange={(e) => setFirstName(e.currentTarget.value)}
+        />
+
+        <TextInput
+          label="Last Name"
+          value={lastName}
+          onChange={(e) => setLastName(e.currentTarget.value)}
+        />
+
+        <TextInput
+          label="Position"
+          value={position}
+          onChange={(e) => setPosition(e.currentTarget.value)}
+        />
+
+        <TextInput
+          label="Email"
+          value={email}
+          onChange={(e) => setEmail(e.currentTarget.value)}
+        />
+
+        <TextInput
+          label="Phone"
+          required
+          value={phone}
+          onChange={(e) => setPhone(e.currentTarget.value)}
+        />
+
+        <Select
+          label="Country"
+          required
+          searchable
+          value={country}
+          onChange={(value) => setCountry(value || "")}
+          data={countryOptions}
+        />
+
+        <TextInput
+          label="Mobile"
+          value={mobile}
+          onChange={(e) => setMobile(e.currentTarget.value)}
+        />
+
+        <TextInput
+          label="Notes"
+          value={notes}
+          onChange={(e) => setNotes(e.currentTarget.value)}
+        />
+
+        <Group justify="flex-end" mt="md">
+          <Button variant="default" onClick={onClose}>
+            Cancel
+          </Button>
+
+          <Button onClick={handleSubmit}>
+            Save
+          </Button>
+        </Group>
+
+      </Stack>
+    </Modal>
   );
 }

@@ -1,37 +1,144 @@
-import { useCompanies } from "../../hooks/useCompanies";
+import { useState } from "react";
+import { useCompanies } from "../hooks/useCompanies";
+import PageHeader from "../components/common/PageHeader";
 
 export default function Companies() {
-  const { companies, loading } = useCompanies();
+  const { companies } = useCompanies();
 
-  if (loading) return <p>Loading...</p>;
+  const [search, setSearch] = useState("");
+
+  const filteredCompanies = companies.filter((company: any) =>
+    company.name?.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
-    <>
-      <h1>Companies</h1>
+    <div>
+      <PageHeader
+        title="Companies"
+        subtitle="Manage customers, suppliers and partners."
+        action={
+          <button
+            style={{
+              background: "#C62828",
+              color: "#ffffff",
+              border: "none",
+              borderRadius: 8,
+              padding: "10px 18px",
+              cursor: "pointer",
+              fontWeight: 600,
+            }}
+          >
+            + Add Company
+          </button>
+        }
+      />
 
-      <p>Total Companies: {companies.length}</p>
+      <div
+        style={{
+          marginBottom: 20,
+        }}
+      >
+        <input
+          type="text"
+          placeholder="Search companies..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          style={{
+            width: 320,
+            padding: "10px 14px",
+            borderRadius: 8,
+            border: "1px solid #d1d5db",
+            fontSize: 14,
+          }}
+        />
+      </div>
 
-      <table border={1} cellPadding={8}>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Country</th>
-            <th>City</th>
-            <th>Email</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {companies.map((company) => (
-            <tr key={company.id}>
-              <td>{company.name}</td>
-              <td>{company.country}</td>
-              <td>{company.city}</td>
-              <td>{company.email}</td>
+      <div
+        style={{
+          background: "#ffffff",
+          borderRadius: 12,
+          padding: 24,
+          boxShadow: "0 2px 10px rgba(0,0,0,.08)",
+        }}
+      >
+        <table
+          style={{
+            width: "100%",
+            borderCollapse: "collapse",
+          }}
+        >
+          <thead>
+            <tr
+              style={{
+                borderBottom: "1px solid #e5e7eb",
+                textAlign: "left",
+              }}
+            >
+              <th style={{ padding: 12 }}>Company</th>
+              <th style={{ padding: 12 }}>Country</th>
+              <th style={{ padding: 12 }}>Type</th>
+              <th style={{ padding: 12 }}>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </>
+          </thead>
+
+          <tbody>
+            {filteredCompanies.map((company: any) => (
+              <tr
+                key={company.id}
+                style={{
+                  borderBottom: "1px solid #f1f1f1",
+                }}
+              >
+                <td style={{ padding: 12 }}>
+                  {company.name}
+                </td>
+
+                <td style={{ padding: 12 }}>
+                  {company.country || "-"}
+                </td>
+
+                <td style={{ padding: 12 }}>
+                  {company.type || "-"}
+                </td>
+
+                <td style={{ padding: 12 }}>
+                  <button
+                    style={{
+                      marginRight: 8,
+                      cursor: "pointer",
+                    }}
+                  >
+                    Edit
+                  </button>
+
+                  <button
+                    style={{
+                      cursor: "pointer",
+                    }}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+
+            {filteredCompanies.length === 0 && (
+              <tr>
+                <td
+                  colSpan={4}
+                  style={{
+                    padding: 24,
+                    textAlign: "center",
+                    color: "#777",
+                  }}
+                >
+                  No companies found.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 }

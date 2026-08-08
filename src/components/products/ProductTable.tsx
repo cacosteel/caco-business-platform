@@ -3,11 +3,13 @@ import type { product } from "../../types/product";
 type Props = {
   products: product[];
   onDelete: (id: string) => Promise<void>;
+  onEdit: (product: product) => void;
 };
 
 export default function ProductTable({
   products,
   onDelete,
+  onEdit,
 }: Props) {
   return (
     <table border={1} cellPadding={8}>
@@ -33,6 +35,7 @@ export default function ProductTable({
               {product.unit_price} {product.currency}
             </td>
             <td>
+              <button onClick={() => onEdit(product)}>Edit</button>{" "}
               <button onClick={() => onDelete(product.id)}>
                 Delete
               </button>
