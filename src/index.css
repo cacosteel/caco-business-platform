@@ -256,14 +256,29 @@ body {
 
 .caco-user-card {
   display: flex;
-  align-items: center;
-  gap: 9px;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
   margin-top: auto;
   padding: 14px 6px 2px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+#root .caco-user-summary {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #fff;
+  text-decoration: none;
+}
+
+#root .caco-user-summary:hover .caco-user-name {
+  color: var(--caco-primary);
+}
+
 .caco-user-avatar {
+  flex: 0 0 auto;
   width: 29px;
   height: 29px;
   border-radius: 50%;
@@ -276,15 +291,52 @@ body {
   font-weight: 700;
 }
 
-.caco-user-name {
-  font-size: 11px;
-  font-weight: 600;
+.caco-user-details {
+  min-width: 0;
 }
 
-.caco-user-role {
+.caco-user-name {
+  overflow: hidden;
+  font-size: 11px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.caco-user-email {
+  overflow: hidden;
   font-size: 10px;
-  text-transform: capitalize;
   color: var(--caco-sidebar-muted);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#root .caco-sign-out-button {
+  width: 100%;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.045);
+  color: #e7ecef;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#root .caco-sign-out-button:hover:not(:disabled) {
+  border-color: rgba(238, 119, 119, 0.5);
+  background: rgba(238, 119, 119, 0.11);
+  color: #ffd7d7;
+}
+
+#root .caco-sign-out-button:disabled {
+  cursor: wait;
+  opacity: 0.6;
 }
 
 .caco-main {
