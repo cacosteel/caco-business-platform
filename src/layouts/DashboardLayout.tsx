@@ -1,4 +1,4 @@
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import type { ComponentType } from "react";
 import {
@@ -8,12 +8,15 @@ import {
   CircleUserRound,
   ContactRound,
   LayoutDashboard,
+  LogOut,
   Megaphone,
   PackageSearch,
   Settings,
   ShoppingCart,
 } from "lucide-react";
+import toast from "react-hot-toast";
 import { useAuth } from "../contexts/AuthContext";
+import { signOut } from "../services/authService";
 
 type NavChild = {
   name: string;
@@ -30,7 +33,9 @@ type NavItem = {
 
 export default function DashboardLayout() {
   const location = useLocation();
-  const { profile } = useAuth();
+  const navigate = useNavigate();
+  const { user, profile } = useAuth();
+  const [signingOut, setSigningOut] = useState(false);
   const [openGroups, setOpenGroups] = useState({
     marketing: location.pathname.includes("email"),
     sales:
@@ -90,6 +95,18 @@ export default function DashboardLayout() {
           },
         ]
       : memberMenuItems;
+
+  async function handleSignOut() {
+    setSigningOut(true);
+
+    try {
+      await signOut();
+      navigate("/login", { replace: true });
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "You could not be signed out.");
+      setSigningOut(false);
+    }
+  }
 
   return (
     <div className="caco-shell">
@@ -176,13 +193,31 @@ export default function DashboardLayout() {
         </nav>
 
         <div className="caco-user-card">
-          <div className="caco-user-avatar">
-            {(profile?.full_name ?? "U").charAt(0).toUpperCase()}
-          </div>
-          <div>
-            <div className="caco-user-name">{profile?.full_name ?? "User"}</div>
-            <div className="caco-user-role">{profile?.role}</div>
-          </div>
+          <Link
+            aria-label="Open my profile"
+            className="caco-user-summary"
+            to="/dashboard/profile"
+          >
+            <div className="caco-user-avatar">
+              {(profile?.full_name ?? "U").charAt(0).toUpperCase()}
+            </div>
+            <div className="caco-user-details">
+              <div className="caco-user-name">{profile?.full_name ?? "User"}</div>
+              <div className="caco-user-email" title={user?.email}>
+                {user?.email ?? profile?.email}
+              </div>
+            </div>
+          </Link>
+          <button
+            aria-label="Sign out"
+            className="caco-sign-out-button"
+            disabled={signingOut}
+            onClick={() => void handleSignOut()}
+            type="button"
+          >
+            <LogOut size={14} strokeWidth={1.8} />
+            <span>{signingOut ? "Signing out..." : "Sign out"}</span>
+          </button>
         </div>
       </aside>
 
