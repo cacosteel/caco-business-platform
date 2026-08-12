@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 
 export default function Login() {
@@ -16,7 +16,7 @@ export default function Login() {
     setError("");
 
     const { error } = await supabase.auth.signInWithPassword({
-      email,
+      email: email.trim().toLowerCase(),
       password,
     });
 
@@ -46,6 +46,7 @@ export default function Login() {
       <form onSubmit={handleLogin}>
         <div style={{ marginBottom: 16 }}>
           <input
+            autoComplete="email"
             type="email"
             placeholder="Email"
             value={email}
@@ -57,6 +58,7 @@ export default function Login() {
 
         <div style={{ marginBottom: 16 }}>
           <input
+            autoComplete="current-password"
             type="password"
             placeholder="Password"
             value={password}
@@ -64,6 +66,15 @@ export default function Login() {
             style={{ width: "100%", boxSizing: "border-box", padding: 11, border: "1px solid #d9e4e9", borderRadius: 6, color: "var(--caco-text-strong)", outlineColor: "var(--caco-primary)" }}
             required
           />
+        </div>
+
+        <div style={{ margin: "-6px 0 16px", textAlign: "right" }}>
+          <Link
+            to="/forgot-password"
+            style={{ color: "var(--caco-primary-hover)", fontWeight: 600, textDecoration: "none" }}
+          >
+            Forgot password?
+          </Link>
         </div>
 
         <button
