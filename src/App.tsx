@@ -14,8 +14,6 @@ import Contacts from "./pages/dashboard/Contacts";
 import Products from "./pages/dashboard/Products";
 import Inquiries from "./pages/dashboard/Inquiries";
 import Quotations from "./pages/dashboard/Quotations";
-import QuotationForm from "./pages/dashboard/QuotationForm";
-import QuotationDetail from "./pages/dashboard/QuotationDetail";
 
 import Orders from "./pages/dashboard/Orders";
 import OrderForm from "./pages/dashboard/OrderForm";
@@ -101,8 +99,8 @@ function App() {
             <Route path="inquiries" element={<Inquiries />} />
             <Route path="supplier-sourcing" element={<SupplierSourcing />} />
             <Route path="quotations" element={<Quotations />} />
-            <Route path="quotations/new" element={<QuotationForm />} />
-            <Route path="quotations/:id" element={<QuotationDetail />} />
+            <Route path="quotations/new" element={<Navigate to="/dashboard/quotations" replace />} />
+            <Route path="quotations/:id" element={<Navigate to="/dashboard/quotations" replace />} />
             <Route path="sales-contracts" element={<SalesContracts />} />
             <Route path="orders" element={<Orders />} />
             <Route path="orders/new" element={<OrderForm />} />
