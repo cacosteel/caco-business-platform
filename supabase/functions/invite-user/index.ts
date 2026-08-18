@@ -1,7 +1,7 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
-  "Access-Control-Allow-Origin": "https://app.cacosteel.com",
+  "Access-Control-Allow-Origin": Deno.env.get("APP_ORIGIN") ?? "http://localhost:5173",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
@@ -31,7 +31,7 @@ Deno.serve(async (request) => {
     if (!company) throw new Error("Company not found");
 
     const { data: invited, error: inviteError } = await admin.auth.admin.inviteUserByEmail(normalizedEmail, {
-      redirectTo: Deno.env.get("INVITE_REDIRECT_URL") ?? "https://app.cacosteel.com/invite",
+      redirectTo: Deno.env.get("INVITE_REDIRECT_URL") ?? `${Deno.env.get("APP_ORIGIN") ?? "http://localhost:5173"}/invite`,
       data: {
         company_id: companyId,
         invited_by_admin: true,

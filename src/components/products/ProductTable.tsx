@@ -18,8 +18,8 @@ export default function ProductTable({
           <th>Code</th>
           <th>Name</th>
           <th>Category</th>
-          <th>Unit</th>
-          <th>Price</th>
+          <th>Description</th>
+          <th>Status</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -30,10 +30,8 @@ export default function ProductTable({
             <td>{product.code}</td>
             <td>{product.name}</td>
             <td>{product.category}</td>
-            <td>{product.unit}</td>
-            <td>
-              {product.unit_price} {product.currency}
-            </td>
+            <td>{product.description || "—"}</td>
+            <td>{product.is_active ? "Active" : "Inactive"}</td>
             <td>
               <button onClick={() => onEdit(product)}>Edit</button>{" "}
               <button onClick={() => onDelete(product.id)}>

@@ -7,8 +7,8 @@ const adminTools = [
   { title: "Deletion requests", description: "Review member requests before records are soft-deleted.", path: "/dashboard/deletion-requests", action: "Review requests", available: true },
   { title: "Company types", description: "Manage the available company categories.", path: "/dashboard/company-types", action: "Manage types", available: true },
   { title: "Activity types", description: "Manage the communication options used in company activity records.", path: "/dashboard/activity-types", action: "Manage types", available: true },
-  { title: "Platform profile", description: "Maintain shared CACO organisation details for future documents and public pages.", path: "/dashboard/platform-settings", action: "Edit profile", available: true },
-  { title: "Google Workspace", description: "Connect the shared CACO sending mailbox for future email campaigns.", path: "/dashboard/gmail", action: "Connect Gmail", available: true },
+  { title: "Platform profile", description: "Maintain shared UNIBA organisation details for future documents and public pages.", path: "/dashboard/platform-settings", action: "Edit profile", available: true },
+  { title: "Google Workspace", description: "Connect the shared UNIBA sending mailbox for future email campaigns.", path: "/dashboard/gmail", action: "Connect Gmail", available: true },
   { title: "Resource publishing", description: "Publish catalogues and product documents to the public website.", path: "/dashboard/public-resources", action: "Manage resources", available: true },
 ];
 

@@ -55,13 +55,6 @@ export default function ProductDetailsDrawer({
 
         <div>
           <Text size="sm" c="dimmed">
-            Unit
-          </Text>
-          <Text>{product.unit || "-"}</Text>
-        </div>
-
-        <div>
-          <Text size="sm" c="dimmed">
             Description
           </Text>
           <Text>{product.description || "-"}</Text>

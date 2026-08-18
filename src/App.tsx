@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Login from "./pages/Login";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 import PendingApproval from "./pages/PendingApproval";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import AdminRoute from "./components/auth/AdminRoute";
@@ -10,18 +12,9 @@ import DashboardLayout from "./layouts/DashboardLayout";
 import Companies from "./pages/dashboard/Companies";
 import Contacts from "./pages/dashboard/Contacts";
 import Products from "./pages/dashboard/Products";
-import Inquiries from "./pages/dashboard/Inquiries";
-import Quotations from "./pages/dashboard/Quotations";
-import QuotationForm from "./pages/dashboard/QuotationForm";
-import QuotationDetail from "./pages/dashboard/QuotationDetail";
-
-import Orders from "./pages/dashboard/Orders";
-import OrderForm from "./pages/dashboard/OrderForm";
-import OrderWorkspace from "./pages/dashboard/workspaces/OrderWorkspace";
 import Users from "./pages/dashboard/Users";
 import Profile from "./pages/dashboard/Profile";
 import Dashboard from "./pages/dashboard/Dashboard";
-import Documents from "./pages/dashboard/Documents";
 import CompanyProfile from "./pages/dashboard/CompanyProfile";
 import Administration from "./pages/dashboard/Administration";
 import CompanyTypes from "./pages/dashboard/CompanyTypes";
@@ -35,9 +28,6 @@ import EmailTemplates from "./pages/dashboard/EmailTemplates";
 import GmailSettings from "./pages/dashboard/GmailSettings";
 import ComposeEmail from "./pages/dashboard/ComposeEmail";
 import SentEmails from "./pages/dashboard/SentEmails";
-import SalesManagement from "./pages/dashboard/SalesManagement";
-import SupplierSourcing from "./pages/dashboard/SupplierSourcing";
-import SalesContracts from "./pages/dashboard/SalesContracts";
 
 function App() {
   return (
@@ -59,6 +49,9 @@ function App() {
           path="/login"
           element={<Login />}
         />
+
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
 
         <Route path="/pending-approval" element={<PendingApproval />} />
         <Route path="/invite" element={<Invite />} />
@@ -90,20 +83,6 @@ function App() {
             path="products"
             element={<Products />}
           />
-
-          <Route element={<AdminRoute />}>
-            <Route path="sales" element={<SalesManagement />} />
-            <Route path="inquiries" element={<Inquiries />} />
-            <Route path="supplier-sourcing" element={<SupplierSourcing />} />
-            <Route path="quotations" element={<Quotations />} />
-            <Route path="quotations/new" element={<QuotationForm />} />
-            <Route path="quotations/:id" element={<QuotationDetail />} />
-            <Route path="sales-contracts" element={<SalesContracts />} />
-            <Route path="orders" element={<Orders />} />
-            <Route path="orders/new" element={<OrderForm />} />
-            <Route path="orders/:id" element={<OrderWorkspace />} />
-            <Route path="documents" element={<Documents />} />
-          </Route>
 
           <Route path="profile" element={<Profile />} />
 

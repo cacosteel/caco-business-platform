@@ -2,18 +2,18 @@
 @import "tailwindcss";
 
 :root {
-  --caco-primary: #36b6cf;
-  --caco-primary-hover: #2b9fb8;
-  --caco-primary-soft: #eaf8fb;
-  --caco-sidebar: #303238;
-  --caco-sidebar-muted: #aeb7bf;
-  --caco-page: #f4f7f9;
+  --caco-primary: #5fae3d;
+  --caco-primary-hover: #43852c;
+  --caco-primary-soft: #eff7e9;
+  --caco-sidebar: #363638;
+  --caco-sidebar-muted: #c1c4c0;
+  --caco-page: #f6f8f4;
   --caco-surface: #ffffff;
-  --caco-surface-soft: #f8fafb;
-  --caco-border: #e2eaee;
-  --caco-text: #465662;
-  --caco-text-strong: #2d3b45;
-  --caco-muted: #8796a1;
+  --caco-surface-soft: #f6f8f4;
+  --caco-border: #dfe7da;
+  --caco-text: #4a4d48;
+  --caco-text-strong: #343634;
+  --caco-muted: #7a8178;
   --caco-danger: #ee7777;
 }
 
@@ -158,6 +158,91 @@ body {
   font-size: 14px;
   font-weight: 700;
   box-shadow: 0 7px 18px rgba(54, 182, 207, 0.2);
+}
+
+.caco-brand-logo {
+  width: 82px;
+  height: 34px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.uniba-login-logo {
+  display: block;
+  width: 170px;
+  height: 64px;
+  margin: 0 auto 4px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.uniba-auth-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: var(--caco-page);
+}
+
+.uniba-auth-card {
+  width: min(100%, 400px);
+  box-sizing: border-box;
+  padding: 28px;
+  border: 1px solid var(--caco-border);
+  border-radius: 10px;
+  background: var(--caco-surface);
+  box-shadow: 0 8px 30px rgba(62, 82, 95, 0.08);
+}
+
+.uniba-auth-card h1 {
+  margin: 0;
+  color: var(--caco-text-strong);
+}
+
+.uniba-auth-card p {
+  margin: 6px 0 20px;
+  color: var(--caco-muted);
+}
+
+.uniba-auth-card input {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+  padding: 11px;
+  border: 1px solid var(--caco-border);
+  border-radius: 6px;
+  outline-color: var(--caco-primary);
+}
+
+.uniba-auth-card button {
+  width: 100%;
+  margin-bottom: 14px;
+  padding: 11px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--caco-primary);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.uniba-auth-success,
+.uniba-auth-error {
+  margin-bottom: 14px;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.uniba-auth-success {
+  color: #2f6e25;
+  background: var(--caco-primary-soft);
+}
+
+.uniba-auth-error {
+  color: #9d3838;
+  background: #fff1f1;
 }
 
 .caco-brand-name {

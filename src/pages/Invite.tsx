@@ -71,7 +71,7 @@ export default function Invite() {
       await acceptInvitation(firstName, lastName, password);
       setLinkState("complete");
       setMessage(
-        "Your account is ready. Opening the CACO Business Platform...",
+        "Your account is ready. Opening UNIBA Connect...",
       );
       toast.success("Your account has been created.");
       window.setTimeout(() => window.location.replace("/dashboard"), 900);
@@ -101,8 +101,8 @@ export default function Invite() {
           <div>
             <Title order={1}>Complete your invitation</Title>
             <Text c="dimmed">
-              Create your password and complete your profile to enter the CACO
-              platform.
+              Create your password and complete your profile to enter UNIBA
+              Connect.
             </Text>
           </div>
           <Alert color={alertColor}>{message}</Alert>

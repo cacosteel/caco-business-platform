@@ -17,7 +17,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <MantineProvider
       defaultColorScheme="light"
       theme={{
-        primaryColor: "cacoBlue",
+        primaryColor: "unibaGreen",
         primaryShade: 5,
         fontFamily: '"Inter", "Segoe UI", Roboto, Arial, sans-serif',
         lineHeights: { md: "1.5" },
@@ -29,17 +29,17 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           xl: "18px",
         },
         colors: {
-          cacoBlue: [
-            "#F1FBFD",
-            "#DFF5F9",
-            "#C3EAF2",
-            "#98DCE9",
-            "#68CADC",
-            "#36B6CF",
-            "#2B9FB8",
-            "#26879D",
-            "#256E7F",
-            "#235B68",
+          unibaGreen: [
+            "#f3f9ef",
+            "#e4f1dd",
+            "#c9e2bc",
+            "#a9d094",
+            "#82bc68",
+            "#5fae3d",
+            "#43852c",
+            "#356a24",
+            "#2b551e",
+            "#213f17",
           ],
         },
       }}

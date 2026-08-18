@@ -1,5 +1,6 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-const headers = { "Access-Control-Allow-Origin": "https://app.cacosteel.com", "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type", "Content-Type": "application/json" };
+const appOrigin = Deno.env.get("APP_ORIGIN") ?? "http://localhost:5173";
+const headers = { "Access-Control-Allow-Origin": appOrigin, "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type", "Content-Type": "application/json" };
 function base64Url(text: string) { const bytes = new TextEncoder().encode(text); let value = ""; for (const byte of bytes) value += String.fromCharCode(byte); return btoa(value).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); }
 Deno.serve(async (request) => {
   if (request.method === "OPTIONS") return new Response("ok", { headers });

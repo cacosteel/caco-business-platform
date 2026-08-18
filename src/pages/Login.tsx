@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 
 export default function Login() {
@@ -40,8 +40,9 @@ export default function Login() {
       }}
     >
       <div style={{ width: "100%", maxWidth: 400, padding: 28, background: "var(--caco-surface)", border: "1px solid var(--caco-border)", borderRadius: 10, boxShadow: "0 8px 30px rgba(62,82,95,0.08)" }}>
-      <h2 style={{ margin: 0, color: "var(--caco-text-strong)" }}>CACO Business Platform</h2>
-      <p style={{ margin: "5px 0 22px", color: "var(--caco-muted)" }}>Sign in to your account</p>
+      <img className="uniba-login-logo" src="/uniba-logo.webp" alt="UNIBA" />
+      <h2 style={{ margin: 0, color: "var(--caco-text-strong)" }}>UNIBA Connect</h2>
+      <p style={{ margin: "5px 0 22px", color: "var(--caco-muted)" }}>Contacts, email outreach and product catalogues</p>
 
       <form onSubmit={handleLogin}>
         <div style={{ marginBottom: 16 }}>
@@ -83,6 +84,10 @@ export default function Login() {
         >
           {loading ? "Signing in..." : "Login"}
         </button>
+
+        <div style={{ marginTop: 14, textAlign: "center" }}>
+          <Link to="/forgot-password">Forgot your password?</Link>
+        </div>
 
         {error && (
           <p style={{ color: "#d95f5f", marginTop: 16 }}>

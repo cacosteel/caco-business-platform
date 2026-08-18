@@ -4,6 +4,7 @@ import {
   Modal,
   Select,
   Stack,
+  Switch,
   Textarea,
   TextInput,
 } from "@mantine/core";
@@ -31,16 +32,16 @@ export default function ProductForm({
   const [name, setName] = useState("");
   const [code, setCode] = useState("");
   const [category, setCategory] = useState("");
-  const [unit, setUnit] = useState("");
   const [description, setDescription] = useState("");
+  const [isActive, setIsActive] = useState(true);
 
   useEffect(() => {
     if (product) {
       setName(product.name || "");
       setCode(product.code || "");
       setCategory(product.category || "");
-      setUnit(product.unit || "");
       setDescription(product.description || "");
+      setIsActive(product.is_active ?? true);
     } else {
       clearForm();
     }
@@ -50,8 +51,8 @@ export default function ProductForm({
     setName("");
     setCode("");
     setCategory("");
-    setUnit("");
     setDescription("");
+    setIsActive(true);
   }
 
   async function handleSubmit() {
@@ -59,8 +60,8 @@ export default function ProductForm({
       name,
       code,
       category,
-      unit,
       description,
+      is_active: isActive,
     };
 
     try {
@@ -106,23 +107,15 @@ export default function ProductForm({
           value={category}
           onChange={(value) => setCategory(value || "")}
           data={[
-            "Steel Coil",
-            "Steel Sheet",
-            "Steel Pipe",
-            "Steel Profile",
-            "Rebar",
-            "Wire Rod",
-            "Fastener",
-            "Tower",
-            "Solar Structure",
+            "NPK Powder Products",
+            "Micro Element Products",
+            "Biostimulants",
+            "Gel & SC Products",
+            "Special Products",
+            "Soil & Water Conditioners",
+            "Raw Materials",
             "Other",
           ]}
-        />
-
-        <TextInput
-          label="Unit"
-          value={unit}
-          onChange={(e) => setUnit(e.currentTarget.value)}
         />
 
         <Textarea
@@ -130,6 +123,12 @@ export default function ProductForm({
           minRows={4}
           value={description}
           onChange={(e) => setDescription(e.currentTarget.value)}
+        />
+
+        <Switch
+          label="Active product"
+          checked={isActive}
+          onChange={(event) => setIsActive(event.currentTarget.checked)}
         />
 
         <Group justify="flex-end">

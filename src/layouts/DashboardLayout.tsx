@@ -11,7 +11,6 @@ import {
   Megaphone,
   PackageSearch,
   Settings,
-  ShoppingCart,
 } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext";
 
@@ -23,7 +22,7 @@ type NavChild = {
 type NavItem = {
   name: string;
   path?: string;
-  group?: "marketing" | "sales";
+  group?: "communications";
   icon: ComponentType<{ size?: number; strokeWidth?: number }>;
   items?: NavChild[];
 };
@@ -32,17 +31,10 @@ export default function DashboardLayout() {
   const location = useLocation();
   const { profile } = useAuth();
   const [openGroups, setOpenGroups] = useState({
-    marketing: location.pathname.includes("email"),
-    sales:
-      location.pathname.includes("sales") ||
-      location.pathname.includes("inquir") ||
-      location.pathname.includes("quotation") ||
-      location.pathname.includes("order") ||
-      location.pathname.includes("supplier-sourcing") ||
-      location.pathname.includes("documents"),
+    communications: location.pathname.includes("email"),
   });
 
-  const marketingItems: NavChild[] = [
+  const communicationItems: NavChild[] = [
     { name: "Email Templates", path: "/dashboard/email-templates" },
     { name: "Compose Email", path: "/dashboard/compose-email" },
     { name: "Sent Emails", path: "/dashboard/sent-emails" },
@@ -50,9 +42,10 @@ export default function DashboardLayout() {
 
   const memberMenuItems: NavItem[] = [
     { name: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
-    { name: "My Company", path: "/dashboard/companies", icon: Building2 },
+    { name: "Companies", path: "/dashboard/companies", icon: Building2 },
     { name: "Contacts", path: "/dashboard/contacts", icon: ContactRound },
-    { name: "Marketing", group: "marketing", icon: Megaphone, items: marketingItems },
+    { name: "Email Outreach", group: "communications", icon: Megaphone, items: communicationItems },
+    { name: "Product Catalogue", path: "/dashboard/products", icon: PackageSearch },
     { name: "My Profile", path: "/dashboard/profile", icon: CircleUserRound },
   ];
 
@@ -60,22 +53,8 @@ export default function DashboardLayout() {
     { name: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
     { name: "Companies", path: "/dashboard/companies", icon: Building2 },
     { name: "Contacts", path: "/dashboard/contacts", icon: ContactRound },
-    { name: "Marketing", group: "marketing", icon: Megaphone, items: marketingItems },
-    { name: "Products", path: "/dashboard/products", icon: PackageSearch },
-    {
-      name: "Sales Management",
-      group: "sales",
-      icon: ShoppingCart,
-      items: [
-        { name: "Overview", path: "/dashboard/sales" },
-        { name: "Client Inquiries", path: "/dashboard/inquiries" },
-        { name: "Supplier Sourcing", path: "/dashboard/supplier-sourcing" },
-        { name: "Customer Quotations", path: "/dashboard/quotations" },
-        { name: "Sales Contracts", path: "/dashboard/sales-contracts" },
-        { name: "Orders & Operations", path: "/dashboard/orders" },
-        { name: "Sales Documents", path: "/dashboard/documents" },
-      ],
-    },
+    { name: "Email Outreach", group: "communications", icon: Megaphone, items: communicationItems },
+    { name: "Product Catalogue", path: "/dashboard/products", icon: PackageSearch },
     { name: "My Profile", path: "/dashboard/profile", icon: CircleUserRound },
   ];
 
@@ -95,10 +74,10 @@ export default function DashboardLayout() {
     <div className="caco-shell">
       <aside className="caco-sidebar">
         <div className="caco-brand">
-          <div className="caco-brand-mark">C</div>
+          <img className="caco-brand-logo" src="/uniba-logo.webp" alt="UNIBA" />
           <div>
-            <div className="caco-brand-name">CACO Business Platform</div>
-            <div className="caco-brand-version">Version 1.0</div>
+            <div className="caco-brand-name">UNIBA Connect</div>
+            <div className="caco-brand-version">Contacts &amp; Catalogue</div>
           </div>
         </div>
 

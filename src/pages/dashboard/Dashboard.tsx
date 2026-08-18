@@ -1,10 +1,6 @@
 import { useCompanies } from "../../hooks/useCompanies";
 import { useContacts } from "../../hooks/useContacts";
 import { useProducts } from "../../hooks/useProducts";
-import { useInquiries } from "../../hooks/useInquiries";
-import { useQuotations } from "../../hooks/useQuotations";
-import { useOrders } from "../../hooks/useOrders";
-import { useDocuments } from "../../hooks/useDocuments";
 
 import StatCard from "../../components/dashboard/StatCard";
 
@@ -12,10 +8,6 @@ export default function DashboardHome() {
   const { companies } = useCompanies();
   const { contacts } = useContacts();
   const { products } = useProducts();
-  const { inquiries } = useInquiries();
-  const { quotations } = useQuotations();
-  const { orders } = useOrders();
-  const { documents } = useDocuments();
 
   return (
     <div>
@@ -38,10 +30,6 @@ export default function DashboardHome() {
         <StatCard title="Companies" value={companies.length} />
         <StatCard title="Contacts" value={contacts.length} />
         <StatCard title="Products" value={products.length} />
-        <StatCard title="Inquiries" value={inquiries.length} />
-        <StatCard title="Quotations" value={quotations.length} />
-        <StatCard title="Orders" value={orders.length} />
-        <StatCard title="Documents" value={documents.length} />
       </div>
 
       <div

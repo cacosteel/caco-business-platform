@@ -32,7 +32,7 @@ export async function establishInvitationSession(): Promise<void> {
     const { data, error } = await supabase.auth.setSession({ access_token: accessToken, refresh_token: refreshToken });
     if (error) throw error;
     if (data.session?.user.user_metadata?.invited_by_admin !== true) {
-      throw new Error("This link is not a CACO platform invitation.");
+      throw new Error("This link is not a UNIBA Connect invitation.");
     }
     window.history.replaceState({}, document.title, currentUrl.pathname);
     return;
