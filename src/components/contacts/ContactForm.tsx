@@ -6,6 +6,7 @@ import {
   TextInput,
   Select,
   Anchor,
+  Textarea,
 } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -201,8 +202,9 @@ export default function ContactForm({
           onChange={(e) => setMobile(e.currentTarget.value)}
         />
 
-        <TextInput
+        <Textarea
           label="Notes"
+          minRows={3}
           value={notes}
           onChange={(e) => setNotes(e.currentTarget.value)}
         />
