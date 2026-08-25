@@ -5,6 +5,7 @@ import {
   Stack,
   TextInput,
   Select,
+  Textarea,
 } from "@mantine/core";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -42,6 +43,7 @@ export default function CompanyForm({
   const [shortName, setShortName] = useState("");
   const [formalAddress, setFormalAddress] = useState("");
   const [registrationNumber, setRegistrationNumber] = useState("");
+  const [notes, setNotes] = useState("");
 
   useEffect(() => {
     if (company) {
@@ -55,6 +57,7 @@ export default function CompanyForm({
       setShortName(company.short_name || "");
       setFormalAddress(company.formal_address || company.address || "");
       setRegistrationNumber(company.registration_number || company.tax_number || "");
+      setNotes(company.notes || "");
     } else {
       clearForm();
     }
@@ -71,6 +74,7 @@ export default function CompanyForm({
     setShortName("");
     setFormalAddress("");
     setRegistrationNumber("");
+    setNotes("");
   }
 
   useEffect(() => {
@@ -90,6 +94,8 @@ export default function CompanyForm({
       short_name: shortName || null,
       formal_address: formalAddress || null,
       registration_number: registrationNumber || null,
+      tax_number: registrationNumber || null,
+      notes: notes.trim() || null,
     };
 
     try {
@@ -117,7 +123,7 @@ export default function CompanyForm({
       <Stack>
 
         <TextInput
-          label="Company Name"
+          label="Formal company name"
           value={name}
           onChange={(e) => setName(e.currentTarget.value)}
           required
@@ -141,9 +147,9 @@ export default function CompanyForm({
           data={countryOptions}
         />
 
-        <TextInput label="Short Name" value={shortName} onChange={(e) => setShortName(e.currentTarget.value)} />
-        <TextInput label="Head Office Address" value={formalAddress} onChange={(e) => setFormalAddress(e.currentTarget.value)} />
-        <TextInput label="Registration or Tax Number" value={registrationNumber} onChange={(e) => setRegistrationNumber(e.currentTarget.value)} />
+        <TextInput label="Company short name" value={shortName} onChange={(e) => setShortName(e.currentTarget.value)} />
+        <TextInput label="Address" value={formalAddress} onChange={(e) => setFormalAddress(e.currentTarget.value)} />
+        <TextInput label="Tax number" value={registrationNumber} onChange={(e) => setRegistrationNumber(e.currentTarget.value)} />
 
         <TextInput
           label="City"
@@ -154,7 +160,7 @@ export default function CompanyForm({
         />
 
         <TextInput
-          label="Website"
+          label="Web page"
           value={website}
           onChange={(e) =>
             setWebsite(e.currentTarget.value)
@@ -170,12 +176,14 @@ export default function CompanyForm({
         />
 
         <TextInput
-          label="Phone"
+          label="Company telephone"
           value={phone}
           onChange={(e) =>
             setPhone(e.currentTarget.value)
           }
         />
+
+        <Textarea label="Notes" minRows={3} value={notes} onChange={(e) => setNotes(e.currentTarget.value)} />
 
 
         <Group justify="flex-end" mt="md">
