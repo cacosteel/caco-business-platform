@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { IconBrandGoogle } from "@tabler/icons-react";
 import { supabase } from "../lib/supabase";
 
 export default function Login() {
@@ -8,6 +9,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
 
   async function handleLogin(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -27,6 +29,21 @@ export default function Login() {
     }
 
     setLoading(false);
+  }
+
+  async function handleGoogleWorkspaceLogin() {
+    setGoogleLoading(true);
+    setError("");
+
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: `${window.location.origin}/dashboard` },
+    });
+
+    if (error) {
+      setError(error.message);
+      setGoogleLoading(false);
+    }
   }
 
   return (
@@ -79,7 +96,7 @@ export default function Login() {
 
         <button
           type="submit"
-          disabled={loading}
+          disabled={loading || googleLoading}
           style={{
             width: "100%",
             padding: 11,
@@ -88,12 +105,32 @@ export default function Login() {
             background: "var(--caco-primary)",
             color: "#fff",
             fontWeight: 600,
-            cursor: loading ? "default" : "pointer",
-            opacity: loading ? 0.7 : 1,
+            cursor: loading || googleLoading ? "default" : "pointer",
+            opacity: loading || googleLoading ? 0.7 : 1,
           }}
         >
           {loading ? "Signing in..." : "Login"}
         </button>
+
+        <div style={{ display: "flex", alignItems: "center", gap: 12, margin: "20px 0 16px", color: "var(--caco-muted)", fontSize: 13 }}>
+          <span style={{ height: 1, flex: 1, background: "var(--caco-border)" }} />
+          <span>or</span>
+          <span style={{ height: 1, flex: 1, background: "var(--caco-border)" }} />
+        </div>
+
+        <button
+          type="button"
+          onClick={() => void handleGoogleWorkspaceLogin()}
+          disabled={loading || googleLoading}
+          style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, padding: 11, border: "1px solid #d9e4e9", borderRadius: 6, background: "#fff", color: "var(--caco-text-strong)", fontWeight: 600, cursor: loading || googleLoading ? "default" : "pointer", opacity: loading || googleLoading ? 0.7 : 1 }}
+        >
+          <IconBrandGoogle size={20} aria-hidden="true" />
+          {googleLoading ? "Redirecting to Google..." : "Continue with Google Workspace"}
+        </button>
+
+        <p style={{ margin: "12px 0 0", color: "var(--caco-muted)", fontSize: 13 }}>
+          Use the Google Workspace email address that received your CACO invitation.
+        </p>
 
         {error && (
           <p style={{ color: "#d95f5f", marginTop: 16 }}>

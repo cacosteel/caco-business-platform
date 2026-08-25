@@ -1,4 +1,5 @@
 import {
+  Badge,
   Button,
   Paper,
   Select,
@@ -137,7 +138,7 @@ export default function UsersPage() {
             <Table.Thead>
               <Table.Tr>
                 <Table.Th>Name</Table.Th>
-                <Table.Th>Email</Table.Th>
+                <Table.Th>Workspace account</Table.Th>
                 <Table.Th>Company</Table.Th>
                 <Table.Th>Role</Table.Th>
                 <Table.Th>Status</Table.Th>
@@ -154,7 +155,7 @@ export default function UsersPage() {
                       .join(" ") || user.full_name || "Unnamed user"}
                   </Table.Td>
 
-                  <Table.Td>{user.email}</Table.Td>
+                  <Table.Td><Stack gap={4}><Text size="sm" fw={500}>{user.email}</Text><Badge size="sm" variant="light" color="cacoBlue" w="fit-content">Google Workspace</Badge></Stack></Table.Td>
 
                   <Table.Td>
                     <Select
